@@ -14,13 +14,7 @@ It can take one of more .css or .styl files as input and join them to one. It di
 Installation
 ============
 
-1. Download source code.
-2. Unpack.
-3. Run to install on the system path:
-
-        cd /path_download_folder
-        npm install -g
-
+```npm install styletto -g```
 
 Usage
 =====
