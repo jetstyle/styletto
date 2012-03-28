@@ -1,0 +1,23 @@
+@import "http://some.ru/external.css";
+@import "https://some.secure.ru/external.css";
+@import "/absolute.url.must.not.resolve.css";
+
+@import 'http://some.ru/external.css';
+@import 'https://some.secure.ru/external.css';
+@import '/absolute.url.must.not.resolve.css';
+
+@import url("http://some.ru/external.css");
+@import url("https://some.secure.ru/external.css");
+@import url("/absolute.url.must.not.resolve.css");
+
+@import url('http://some.ru/external.css');
+@import url("https://some.secure.ru/external.css");
+@import url("/absolute.url.must.not.resolve.css");
+
+@import url(http://some.ru/external.css);
+@import url(https://some.secure.ru/external.css);
+@import url(/absolute.url.must.not.resolve.css);
+
+@import "b-includes/b-includes.css" screen and (max-device-width: 480px);
+
+/*@import "commented-url-must-be-deleted.css";*/

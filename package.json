@@ -1,0 +1,20 @@
+{
+    "name": "styletto",
+    "description": "CSS assets manager",
+    "version": "0.1.5",
+    "keywords": ["asset management", "css"],
+    "homepage": "http://github.com/iadramelk/styletto",
+    "author": "Alexey Ivanov <iadramelk@gmail.com>",
+    "repository": "git://github.com/iadramelk/styletto",
+    "main": "./index.js",
+    "bin": { "styletto": "./bin/styletto" },
+    "dependencies": {
+        "csso": "*",
+        "stylus": "*",
+        "konphyg": "*"
+    },
+    "devDependencies": {
+        "vows": "*"
+    },
+    "engines": { "node": "*" }
+}

@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+
+// dependencies
+
+var settings = require('../lib/settings');
+var styletto = require('../lib/styletto');
+
+
+// preparsing of terminal arguments
+
+var stringOfArgv = process.argv;
+
+stringOfArgv.splice(0, 2);
+
+var noArgv = (stringOfArgv.length === 0)
+
+if (noArgv) ShowHelp();
+
+for (var i = 0; i < stringOfArgv.length; i++) {
+
+    var helpMarker = ((stringOfArgv[i].indexOf('--help') != "-1") || (/^-.*h.*/.test(stringOfArgv[i])));
+
+    if (helpMarker) ShowHelp();
+
+}
+
+function ShowHelp() {
+
+    var helpMsg  = '\nUsage: styletto [options] inputFile [outputFile]\n';
+        helpMsg += '\nOptions:\n';
+        helpMsg += '\n-c            Compress output file using csso';
+        helpMsg += '\n-b            Encode images to base64';
+        helpMsg += '\n-h, --help    Display help information';
+
+    console.log(helpMsg);
+
+    process.exit();
+
+}
+
+
+// arguments parsing and error hadling
+
+var config = settings(stringOfArgv);
+
+if ( config instanceof Error ) {
+
+    console.error('\n' + config);
+
+    process.exit();
+
+};
+
+
+// initialising main module with params
+
+styletto(config[0], config[1], function(err, result) {
+
+    if (err) {
+
+        console.error('\n' + err);
+
+        process.exit();
+
+    } else if (result) {
+
+        process.stdout.write(result);
+
+    } else {
+
+        console.log("\nIt's saved!");
+
+        process.exit();
+
+    }
+
+});

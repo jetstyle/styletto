@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('PT Sans'), local('PTSans'), url('b-resources.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('PT Sans'), local('PTSans'), url(b-resources.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('PT Sans'), local('PTSans'), url("b-resources.woff") format('woff');
+}
+
+.b-resources__png { background: url(b-resources.png); }
+
+.b-resources__gif { background: url("b-resources.gif"); }
+
+.b-resources__jpeg { background: url('b-resources.jpeg'); }
+
+.b-resources__jpg { background: url('b-resources.jpg'); }
+
+.b-resources__svg { background: url('b-resources.svg'); }
+
+.b-resources__web-one { background: url("http://www.google.com/images/srpr/logo3w.png"); }
+
+.b-resources__web-two { background: url(http://www.google.com/images/srpr/logo3w.png); }
+
+.b-resources__web-three { background: url('http://www.google.com/images/srpr/logo3w.png'); }
+
+.b-resources__absolute-one { background: url("/b-resources.png"); }
+
+.b-resources__absolute-two { background: url(/b-resources.png); }
+
+.b-resources__absolute-three { background: url('/b-resources.png'); }
+
+.b-resources__none-existing { background: url('b-resources__none-existing.png'); }
