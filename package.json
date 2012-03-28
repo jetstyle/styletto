@@ -5,7 +5,7 @@
     "keywords": ["asset management", "css"],
     "homepage": "http://github.com/iadramelk/styletto",
     "author": "Alexey Ivanov <iadramelk@gmail.com>",
-    "repository": "git://github.com/iadramelk/styletto",
+    "repository": "git@github.com:iAdramelk/styletto.git",
     "main": "./index.js",
     "bin": { "styletto": "./bin/styletto" },
     "dependencies": {
