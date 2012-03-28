@@ -1,5 +1,5 @@
 {
-    "input": ["b-comment/b-comment.css", "b-foot/b-foot.css", "b-common/b-common__font.css", "b-form/b-form.css"],
+    "input": ["b-resources/b-resources.css", "b-includes/b-includes.css"],
     "output": "_all.css",
     "compile": false,
     "base64": true

@@ -91,5 +91,23 @@ settingsSuite.addBatch({
 
 });
 
+settingsSuite.addBatch({
+
+    'Calling "styletto nonexisiting-congif.json" returns:': {
+
+        topic: function () {
+
+            return settings(['nonexisiting-congif.json']);
+
+        },
+
+        'error.': function (params) { assert.instanceOf (params, Error); },
+
+        
+    }
+
+});
+
+
 
 exports.settingsSuite = settingsSuite;
