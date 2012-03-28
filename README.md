@@ -15,7 +15,8 @@ Installation
 ============
 
 1. Download source code.
-2. Run to install on the system path:
+2. Unpack.
+3. Run to install on the system path:
 
         cd /path_download_folder
         npm install -g
