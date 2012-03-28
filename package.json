@@ -1,7 +1,7 @@
 {
     "name": "styletto",
     "description": "CSS assets manager",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "keywords": ["asset management", "css"],
     "homepage": "http://github.com/iadramelk/styletto",
     "author": "Alexey Ivanov <iadramelk@gmail.com>",
