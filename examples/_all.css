@@ -1,55 +1,3 @@
-/* all.css */
-
-@import "http://some.ru/external.css";
-@import "https://some.secure.ru/external.css";
-@import "/absolute.url.must.not.resolve.css";
-
-@import 'http://some.ru/external.css';
-@import 'https://some.secure.ru/external.css';
-@import '/absolute.url.must.not.resolve.css';
-
-@import url("http://some.ru/external.css");
-@import url("https://some.secure.ru/external.css");
-@import url("/absolute.url.must.not.resolve.css");
-
-@import url('http://some.ru/external.css');
-@import url("https://some.secure.ru/external.css");
-@import url("/absolute.url.must.not.resolve.css");
-
-@import url(http://some.ru/external.css);
-@import url(https://some.secure.ru/external.css);
-@import url(/absolute.url.must.not.resolve.css);
-
-@media screen and (max-device-width: 480px) {
-
-/* b-includes.css */
-
-.b-includes {}
-
-/* b-includes_one.css */
-
-.b-includes_one {}
-
-
-
-/* b-includes_two.css */
-
-
-
-.b-includes_two {}
-
-
-
-/* b-includes_three.css */
-
-.b-includes_tree {}
-
-
-
-/* b-includes_four.css */
-
-.b-includes_four {}
-
 /* b-resources.css */
 
 @font-face {
@@ -75,6 +23,9 @@
 
 .b-resources__png { background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABVJREFUeNpi/M+ADzAxjEpjAQABBgBBLAETbs/ntQAAAABJRU5ErkJggg=="); }
 
+.b-socials__fb {background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABVJREFUeNpi/M+ADzAxjEpjAQABBgBBLAETbs/ntQAAAABJRU5ErkJggg==") 0 0 no-repeat}
+.b-socials__fb:hover {background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABVJREFUeNpi/M+ADzAxjEpjAQABBgBBLAETbs/ntQAAAABJRU5ErkJggg==") 0 0 no-repeat}
+
 .b-resources__gif { background: url("data:image/gif;base64,R0lGODlhCgAKAIAAAP8AAAAAACH5BAAAAAAALAAAAAAKAAoAAAIIhI+py+0PYysAOw=="); }
 
 .b-resources__jpeg { background: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAUAAA/+4ADkFkb2JlAGTAAAAAAf/bAIQAAgICAgICAgICAgMCAgIDBAMCAgMEBQQEBAQEBQYFBQUFBQUGBgcHCAcHBgkJCgoJCQwMDAwMDAwMDAwMDAwMDAEDAwMFBAUJBgYJDQsJCw0PDg4ODg8PDAwMDAwPDwwMDAwMDA8MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM/8AAEQgACgAKAwERAAIRAQMRAf/EAE0AAQEAAAAAAAAAAAAAAAAAAAAIAQEBAQAAAAAAAAAAAAAAAAAABwkQAQAAAAAAAAAAAAAAAAAAAAARAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AIwQxqoAAA//2Q=="); }
@@ -96,14 +47,4 @@
 .b-resources__absolute-three { background: url('/b-resources.png'); }
 
 .b-resources__none-existing { background: url("b-resources/b-resources__none-existing.png"); }
-
-
-
-
-
-}
-
-
-
-
 
