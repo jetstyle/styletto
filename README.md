@@ -15,10 +15,10 @@ Installation
 ============
 
 1. Download source code.
-2. Run to install to the system path:
+2. Run to install on the system path:
 
-    cd download_folder
-    npm install -g
+        cd /path_download_folder
+        npm install -g
 
 
 Usage
