@@ -15,5 +15,8 @@
     "devDependencies": {
         "vows": "*"
     },
+    "scripts": {
+         "test": "vows test/* --spec"
+    },
     "engines": { "node": "*" }
 }
