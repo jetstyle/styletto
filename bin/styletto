@@ -35,7 +35,7 @@ function ShowHelp() {
     var helpMsg  = '\nUsage: styletto [options] inputFile [outputFile]\n';
         helpMsg += '\nOptions:\n';
         helpMsg += '\n-h, --help                Displays help information';
-        helpMsg += '\n-v, --varsion             Displays package version';
+        helpMsg += '\n-v, --version             Displays package version';
         helpMsg += '\n-c, --compress[=engine]   Compress output file using either "csso"';
         helpMsg += '\n                          or "yui" compressor. Default is csso';
         helpMsg += '\n-b, --base64[=size]       Encode images to base64, images that are more';
@@ -50,9 +50,7 @@ function ShowHelp() {
 
 function ShowVersion() {
 
-    packagePath = path.join(process.argv[1], '../../package.json');
-
-    var packageFile = JSON.parse(fs.readFileSync(packagePath));
+    var packageFile = JSON.parse(fs.readFileSync('package.json'));
 
     console.log(packageFile.name + ' version ' + packageFile.version);
 

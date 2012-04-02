@@ -28,7 +28,7 @@ If no outputFile given it will return created file to the stdout.
 Options:
 
     -h, --help                Displays help information
-    -v, --varsion             Displays package version
+    -v, --version             Displays package version
     -c, --compress[=engine]   Compress output file using either "csso"
                               or "yui" compressor. Default is csso
     -b, --base64[=size]       Encode images to base64, images that are more
