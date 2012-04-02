@@ -10,7 +10,8 @@
     "bin": { "styletto": "./bin/styletto" },
     "dependencies": {
         "csso": "*",
-        "stylus": "*"
+        "stylus": "*",
+        "css-compressor": "*"
     },
     "devDependencies": {
         "vows": "*"

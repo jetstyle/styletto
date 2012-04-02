@@ -2,13 +2,15 @@
 
 // dependencies
 
-var settings = require('../lib/settings');
-var styletto = require('../lib/styletto');
+var path   = require('path');
+var fs     = require('fs');
 
+var settings = require('../lib/settings');
+var styletto = require('../lib/styletto').init;
 
 // preparsing of terminal arguments
 
-var stringOfArgv = process.argv;
+var stringOfArgv = process.argv.slice(0);
 
 stringOfArgv.splice(0, 2);
 
@@ -22,15 +24,23 @@ for (var i = 0; i < stringOfArgv.length; i++) {
 
     if (helpMarker) ShowHelp();
 
+    var versionMarker = ((stringOfArgv[i].indexOf('--version') != "-1") || (/^-.*v.*/.test(stringOfArgv[i])));
+
+    if (versionMarker) ShowVersion();
+
 }
 
 function ShowHelp() {
 
     var helpMsg  = '\nUsage: styletto [options] inputFile [outputFile]\n';
         helpMsg += '\nOptions:\n';
-        helpMsg += '\n-c            Compress output file using csso';
-        helpMsg += '\n-b            Encode images to base64';
-        helpMsg += '\n-h, --help    Display help information';
+        helpMsg += '\n-h, --help                Displays help information';
+        helpMsg += '\n-v, --varsion             Displays package version';
+        helpMsg += '\n-c, --compress[=engine]   Compress output file using either "csso"';
+        helpMsg += '\n                          or "yui" compressor';
+        helpMsg += '\n-b, --base64[=size]       Encode images to base64, images that are more';
+        helpMsg += '\n                          than "size" value in bytes will not be enoded,';
+        helpMsg += '\n                          default size is 10000 bytes';
 
     console.log(helpMsg);
 
@@ -38,6 +48,17 @@ function ShowHelp() {
 
 }
 
+function ShowVersion() {
+
+    packagePath = path.join(process.argv[1], '../../package.json');
+
+    var packageFile = JSON.parse(fs.readFileSync(packagePath));
+
+    console.log(packageFile.name + ' version ' + packageFile.version);
+
+    process.exit();
+
+}
 
 // arguments parsing and error hadling
 

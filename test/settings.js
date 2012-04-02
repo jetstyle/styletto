@@ -22,7 +22,7 @@ settingsSuite.addBatch({
 
         'output location is "examples/__all.css",': function (params) { assert.equal (params[0].output, 'examples/__all.css'); },
 
-        'compile content is set,': function (params) { assert.isTrue (params[0].compile); },
+        'compress content is set,': function (params) { assert.isTrue (params[0].compress); },
 
         'base64 encode is set.': function (params) { assert.isTrue (params[0].base64); },
         
@@ -44,7 +44,7 @@ settingsSuite.addBatch({
 
         'output location IS NOT set,': function (params) { assert.isUndefined (params[0].output); },
 
-        'compile content IS NOT set,': function (params) { assert.isUndefined (params[0].compile); },
+        'compress content IS NOT set,': function (params) { assert.isUndefined (params[0].compress); },
 
         'base64 encode IS NOT set.': function (params) { assert.isUndefined (params[0].base64); },
         
@@ -66,13 +66,54 @@ settingsSuite.addBatch({
 
         'output location IS "_all.css",': function (params) { assert.equal (params[0].output, '_all.css'); },
 
-        'compile content IS NOT set,': function (params) { assert.isFalse (params[0].compile); },
+        'compress content IS NOT set,': function (params) { assert.isFalse (params[0].compress); },
 
         'base64 encode IS set.': function (params) { assert.isTrue (params[0].base64); },
         
     }
 
 });
+
+settingsSuite.addBatch({
+
+    'Calling "styletto examples/config.json --compress=yui --base64=100000" returns:': {
+
+        topic: function () {
+
+            return settings(['examples/config.json', '--compress=yui', '--base64=100000']);
+
+        },
+
+        'input location IS ARRAY,': function (params) { assert.isArray (params[0].input); },
+
+        'output location IS "_all.css",': function (params) { assert.equal (params[0].output, '_all.css'); },
+
+        'compress content IS set to "yui",': function (params) { assert.equal (params[0].compress, 'yui'); },
+
+        'base64 encode IS set to "100000".': function (params) { assert.equal (params[0].base64, '100000'); },
+        
+    }
+
+});
+
+settingsSuite.addBatch({
+
+    'Calling "styletto examples/config.json --base64=false" returns:': {
+
+        topic: function () {
+
+            return settings(['examples/config.json', '--base64=false']);
+
+        },
+
+        'base64 encode IS NOT set.': function (params) { assert.isFalse (params[0].base64); },
+
+        
+    }
+
+});
+
+
 
 settingsSuite.addBatch({
 

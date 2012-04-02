@@ -1,1 +1,1 @@
-module.exports = require('./lib/styletto');
+module.exports = require('./lib/styletto').init;
