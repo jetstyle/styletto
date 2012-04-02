@@ -54,7 +54,7 @@ Example:
         "base64": 15000
     }
     
-    styletto(config, 'styles/', function(err, result) {
+    styletto(config, '/path/to/dir/there/to/resolve/', function(err, result) {
 
         if (err) throw err;
         
