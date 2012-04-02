@@ -36,7 +36,7 @@ Options:
                               default size is 10000 bytes
 
 
-usage from another app
+Usage from another app
 ======================
 
 Usage: ```styletto(config, targetDir, callback)```
