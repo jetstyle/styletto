@@ -1,4 +1,4 @@
-About
+About  [![Build Status](https://secure.travis-ci.org/iAdramelk/styletto.png)](http://travis-ci.org/iAdramelk/styletto)
 =====
 
 **styletto** is a simple css assets manager written on node.js. Requires node.js and npm to work and install.
