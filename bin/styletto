@@ -37,7 +37,7 @@ function ShowHelp() {
         helpMsg += '\n-h, --help                Displays help information';
         helpMsg += '\n-v, --varsion             Displays package version';
         helpMsg += '\n-c, --compress[=engine]   Compress output file using either "csso"';
-        helpMsg += '\n                          or "yui" compressor';
+        helpMsg += '\n                          or "yui" compressor. Default is csso';
         helpMsg += '\n-b, --base64[=size]       Encode images to base64, images that are more';
         helpMsg += '\n                          than "size" value in bytes will not be enoded,';
         helpMsg += '\n                          default size is 10000 bytes';

@@ -16,10 +16,10 @@ Installation
 
 ```npm install styletto -g```
 
-Usage
-=====
+Terminal usage
+==============
 
-Usage: styletto [options] inputFile [outputFile]
+Usage: ```styletto [options] inputFile [outputFile]```
 
 inputFile can be either: .css, .stylus or config file.
 
@@ -27,9 +27,42 @@ If no outputFile given it will return created file to the stdout.
 
 Options:
 
-    -c            Compress output file using csso
-    -b            Encode images to base64
-    -h, --help    Display help information
+    -h, --help                Displays help information
+    -v, --varsion             Displays package version
+    -c, --compress[=engine]   Compress output file using either "csso"
+                              or "yui" compressor. Default is csso
+    -b, --base64[=size]       Encode images to base64, images that are more
+                              than "size" value in bytes will not be enoded,
+                              default size is 10000 bytes
+
+
+usage from another app
+======================
+
+Usage: ```styletto(config, targetDir, callback)```
+
+Function will return either error, result or NaN (if content is written to file).
+
+Example:
+
+    var styletto = require('styletto');
+    
+    var config = {
+        "input": ["dir/first.css", "dir/second.styl"],
+        "output": "output.css",
+        "compress": 'csso',
+        "base64": 15000
+    }
+    
+    styletto(config, 'styles/', function(err, result) {
+
+        if (err) throw err;
+        
+        else if (result) do something
+        
+        else console.log("\nIt's saved!");
+
+    });
 
 
 Config format
@@ -40,7 +73,7 @@ Full config example:
     {
         "input": ["dir/first.css", "dir/second.styl"],
         "output": "output.css",
-        "compile": false,
+        "compress": false,
         "base64": true
     }
 
