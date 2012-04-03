@@ -50,9 +50,9 @@ function ShowHelp() {
 
 function ShowVersion() {
 
-    var packageFile = JSON.parse(fs.readFileSync('package.json'));
+    //var packageFile = JSON.parse(fs.readFileSync('package.json'));
 
-    console.log(packageFile.name + ' version ' + packageFile.version);
+    console.log('styletto version 0.2.1');
 
     process.exit();
 
