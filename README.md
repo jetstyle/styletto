@@ -36,7 +36,7 @@ Options:
                               default size is 10000 bytes
 
 
-usage from another app
+Usage from another app
 ======================
 
 Usage: ```styletto(config, targetDir, callback)```
@@ -45,16 +45,16 @@ Function will return either error, result or NaN (if content is written to file)
 
 Example:
 
-    var styletto = require('styletto');
+    var styletto = require("styletto");
     
     var config = {
         "input": ["dir/first.css", "dir/second.styl"],
         "output": "output.css",
-        "compress": 'csso',
+        "compress": "csso",
         "base64": 15000
     }
     
-    styletto(config, 'styles/', function(err, result) {
+    styletto(config, "/path/to/dir/there/to/resolve/", function(err, result) {
 
         if (err) throw err;
         
