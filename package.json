@@ -1,7 +1,7 @@
 {
     "name": "styletto",
     "description": "CSS assets manager",
-    "version": "0.2.3",
+    "version": "0.2.7",
     "keywords": ["asset management", "css"],
     "homepage": "http://github.com/iadramelk/styletto",
     "author": "Alexey Ivanov <iadramelk@gmail.com>",
@@ -11,7 +11,9 @@
     "dependencies": {
         "csso": "*",
         "stylus": "*",
-        "css-compressor": "*"
+        "css-compressor": "*",
+        "nib": "*",
+        "canvas": "*"
     },
     "devDependencies": {
         "vows": "*"
