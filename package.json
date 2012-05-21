@@ -1,11 +1,11 @@
 {
     "name": "styletto",
     "description": "CSS assets manager",
-    "version": "0.2.8",
+    "version": "0.2.9",
     "keywords": ["asset management", "css"],
-    "homepage": "http://github.com/iadramelk/styletto",
-    "author": "Alexey Ivanov <iadramelk@gmail.com>",
-    "repository": "git@github.com:iAdramelk/styletto.git",
+    "homepage": "http://github.com/jetstyle/styletto",
+    "author": "Aleksey Ivanov <iadramelk@gmail.com>",
+    "repository": "git@github.com:jetstyle/styletto.git",
     "main": "./index.js",
     "bin": { "styletto": "./bin/styletto" },
     "dependencies": {
