@@ -51,7 +51,7 @@ var showHelp = function() {
 
 var showVersion = function() {
 
-    console.log( APPLICATION_NAME + ' version ' + APPLICATION_VERSION );
+    console.log( APPLICATION_NAME + ' ' + APPLICATION_VERSION );
 
     process.exit();
 
@@ -85,6 +85,16 @@ var arguments = optimist.options( {
 } ).argv;
 
 
+
+// show version
+
+if ( arguments['version'] ) {
+
+    showVersion();
+
+}
+
+
 // show help
 
 var noFileOrShowHelp = ( arguments['_'].length === 0 || arguments['help'] );
@@ -92,15 +102,6 @@ var noFileOrShowHelp = ( arguments['_'].length === 0 || arguments['help'] );
 if ( noFileOrShowHelp ) {
 
     showHelp();
-
-}
-
-
-// show version
-
-if ( arguments['version'] ) {
-
-    showVersion();
 
 }
 
