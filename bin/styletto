@@ -1,70 +1,117 @@
 #!/usr/bin/env node
 
+
+// config
+
+packageJson = JSON.parse(require('fs').readFileSync(__dirname + '/../package.json', 'utf8'));
+
+APPLICATION_NAME    = packageJson.name;
+APPLICATION_VERSION = packageJson.version;
+
+
 // dependencies
 
-var path   = require('path');
-var fs     = require('fs');
+var path     = require('path');
+var fs       = require('fs');
+var colors   = require("colors");
+var optimist = require('optimist');
 
 var settings = require('../lib/settings');
 var styletto = require('../lib/styletto').init;
 
-// preparsing of terminal arguments
 
-var stringOfArgv = process.argv.slice(0);
+// message functions
 
-stringOfArgv.splice(0, 2);
+var showHelp = function() {
 
-var noArgv = (stringOfArgv.length === 0)
+    var helpMsg  = '\nUsage: ' + APPLICATION_NAME + ' ';
+        helpMsg += '[options]'.blue + ' inputFile [outputFile]';
+        helpMsg += '\n\nOptions:\n\n';
+        helpMsg += '  -h, --help'.blue + '                ';
+        helpMsg += 'displays help information\n';
+        helpMsg += '  -v, --version'.blue + '             ';
+        helpMsg += 'displays package version\n';
+        helpMsg += '  -c, --compress[=engine]'.blue + '   ';
+        helpMsg += 'compress output file using either ' + 'csso'.blue;
+        helpMsg += '\n                            ';
+        helpMsg += 'or ' + 'yui'.blue + ' compressor, default is ';
+        helpMsg += 'csso'.blue + '\n';
+        helpMsg += '  -b, --base64[=size]'.blue + '       ';
+        helpMsg += 'encode images to base64, images that are more';
+        helpMsg += '\n                            ';
+        helpMsg += 'than "size" value in bytes will not be enoded,';
+        helpMsg += '\n                            ';
+        helpMsg += 'default size is ' + '10000'.blue + ' bytes\n';
 
-if (noArgv) ShowHelp();
-
-for (var i = 0; i < stringOfArgv.length; i++) {
-
-    var helpMarker = ((stringOfArgv[i].indexOf('--help') != "-1") || (/^-.*h.*/.test(stringOfArgv[i])));
-
-    if (helpMarker) ShowHelp();
-
-    var versionMarker = ((stringOfArgv[i].indexOf('--version') != "-1") || (/^-.*v.*/.test(stringOfArgv[i])));
-
-    if (versionMarker) ShowVersion();
-
-}
-
-function ShowHelp() {
-
-    var helpMsg  = '\nUsage: styletto [options] inputFile [outputFile]\n';
-        helpMsg += '\nOptions:\n';
-        helpMsg += '\n-h, --help                Displays help information';
-        helpMsg += '\n-v, --version             Displays package version';
-        helpMsg += '\n-c, --compress[=engine]   Compress output file using either "csso"';
-        helpMsg += '\n                          or "yui" compressor. Default is csso';
-        helpMsg += '\n-b, --base64[=size]       Encode images to base64, images that are more';
-        helpMsg += '\n                          than "size" value in bytes will not be enoded,';
-        helpMsg += '\n                          default size is 10000 bytes';
-
-    console.log(helpMsg);
+    console.log( helpMsg );
 
     process.exit();
 
 }
 
-function ShowVersion() {
+var showVersion = function() {
 
-    var packageFile = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json')));
-
-    console.log(packageFile.name + ' version ' + packageFile.version);
+    console.log( APPLICATION_NAME + ' version ' + APPLICATION_VERSION );
 
     process.exit();
 
 }
 
-// arguments parsing and error hadling
 
-var config = settings(stringOfArgv);
+// argiments parsing
+
+var arguments = optimist.options( {
+
+    help: {
+        alias: 'h',
+        boolean: true
+    },
+
+    version: {
+        alias: 'v',
+        boolean: true
+    },
+
+    compress: {
+        alias: 'c',
+        short: 'c'
+    },
+
+    base64: {
+        alias: 'b',
+        short: 'b'
+    }
+
+} ).argv;
+
+
+// show help
+
+var noFileOrShowHelp = ( arguments['_'].length === 0 || arguments['help'] );
+
+if ( noFileOrShowHelp ) {
+
+    showHelp();
+
+}
+
+
+// show version
+
+if ( arguments['version'] ) {
+
+    showVersion();
+
+}
+
+
+// running flags parser
+
+var config = settings();
 
 if ( config instanceof Error ) {
 
-    console.error('\n' + config);
+    console.error( '\n' + config );
 
     process.exit();
 
@@ -73,17 +120,17 @@ if ( config instanceof Error ) {
 
 // initialising main module with params
 
-styletto(config[0], config[1], function(err, result) {
+styletto( config[0], config[1], function( err, result ) {
 
-    if (err) {
+    if ( err ) {
 
-        console.error('\n' + err);
+        console.error( '\n' + err );
 
         process.exit();
 
-    } else if (result) {
+    } else if ( result ) {
 
-        process.stdout.write(result);
+        process.stdout.write( result );
 
     } else {
 

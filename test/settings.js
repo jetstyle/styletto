@@ -1,12 +1,37 @@
-var vows   = require('vows');
-var assert = require('assert');
-var fs     = require('fs');
-var path   = require('path');
+var vows      = require('vows');
+var assert    = require('assert');
+var fs        = require('fs');
+var path      = require('path');
+var optimist  = require('optimist');
 
-var settings = require('../lib/settings');
+var settings  = require('../lib/settings');
+
+var argumentsList = {
+
+    help: {
+        alias: 'h',
+        boolean: true
+    },
+
+    version: {
+        alias: 'v',
+        boolean: true
+    },
+
+    compress: {
+        alias: 'c',
+        short: 'c'
+    },
+
+    base64: {
+        alias: 'b',
+        short: 'b'
+    }
+
+};
+
 
 var settingsSuite = vows.describe('Settings module tests');
-
 
 settingsSuite.addBatch({
 
@@ -14,7 +39,7 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['-bc', 'examples/all.css', 'examples/__all.css']);
+            return settings(optimist(['examples/all.css', 'examples/__all.css', '-bc']).options(argumentsList).argv);
 
         },
 
@@ -25,7 +50,7 @@ settingsSuite.addBatch({
         'compress content is set,': function (params) { assert.isTrue (params[0].compress); },
 
         'base64 encode is set.': function (params) { assert.isTrue (params[0].base64); },
-        
+
     }
 
 });
@@ -36,7 +61,7 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['examples/all.css']);
+            return settings(optimist(['examples/all.css']).options(argumentsList).argv);
 
         },
 
@@ -47,7 +72,7 @@ settingsSuite.addBatch({
         'compress content IS NOT set,': function (params) { assert.isUndefined (params[0].compress); },
 
         'base64 encode IS NOT set.': function (params) { assert.isUndefined (params[0].base64); },
-        
+
     }
 
 });
@@ -58,7 +83,7 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['examples/config.json']);
+            return settings(optimist(['examples/config.json']).options(argumentsList).argv);
 
         },
 
@@ -69,7 +94,7 @@ settingsSuite.addBatch({
         'compress content IS NOT set,': function (params) { assert.isFalse (params[0].compress); },
 
         'base64 encode IS set.': function (params) { assert.isTrue (params[0].base64); },
-        
+
     }
 
 });
@@ -80,7 +105,7 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['examples/config.json', '--compress=yui', '--base64=100000']);
+            return settings(optimist(['examples/config.json', '--compress=yui', '--base64=100000']).options(argumentsList).argv);
 
         },
 
@@ -91,7 +116,7 @@ settingsSuite.addBatch({
         'compress content IS set to "yui",': function (params) { assert.equal (params[0].compress, 'yui'); },
 
         'base64 encode IS set to "100000".': function (params) { assert.equal (params[0].base64, '100000'); },
-        
+
     }
 
 });
@@ -102,13 +127,13 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['examples/config.json', '--base64=false']);
+            return settings(optimist(['examples/config.json', '--base64=false']).options(argumentsList).argv);
 
         },
 
         'base64 encode IS NOT set.': function (params) { assert.isFalse (params[0].base64); },
 
-        
+
     }
 
 });
@@ -121,13 +146,13 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['-bc']);
+            return settings(optimist(['-bc']).options(argumentsList).argv);
 
         },
 
         'error.': function (params) { assert.instanceOf (params, Error); },
 
-        
+
     }
 
 });
@@ -138,13 +163,13 @@ settingsSuite.addBatch({
 
         topic: function () {
 
-            return settings(['nonexisiting-congif.json']);
+            return settings(optimist(['nonexisiting-congif.json']).options(argumentsList).argv);
 
         },
 
         'error.': function (params) { assert.instanceOf (params, Error); },
 
-        
+
     }
 
 });

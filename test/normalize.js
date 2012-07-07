@@ -59,25 +59,25 @@ normalizeSuite.addBatch({
 
             for (var i = 0; i < params.input.length; i++) {
 
-                var notExists = (path.existsSync(params.input[i]) !== true);
+                var notExists = (fs.existsSync(params.input[i]) !== true);
 
                 if (notExists) err = true;
 
             }
-            
+
             assert.isFalse (err);
         },
         'output file provided,': function (params) { assert.isString (params.output) },
-        'output file exists,': function (params) { 
+        'output file exists,': function (params) {
 
-            var isExists = (path.existsSync(params.output) && params.exists);
+            var isExists = (fs.existsSync(params.output) && params.exists);
 
             assert.isTrue (isExists);
-        
+
         },
         'compress is set to CSSO,': function (params) { assert.equal (params.compress, 'csso'); },
         'base64 encode size is set to 10000.': function (params) { assert.equal (params.base64, 10000); },
-        
+
     }
 
 });
@@ -92,7 +92,7 @@ normalizeSuite.addBatch({
 
         },
 
-        'input file exists.': function (params) { assert.isTrue (path.existsSync(params.input)); },
+        'input file exists.': function (params) { assert.isTrue (fs.existsSync(params.input)); },
 
     }
 
@@ -109,19 +109,19 @@ normalizeSuite.addBatch({
 
         },
 
-        'input file exists,': function (params) { assert.isTrue (path.existsSync(params.input)); },
+        'input file exists,': function (params) { assert.isTrue (fs.existsSync(params.input)); },
         'output file provided,': function (params) { assert.isString (params.output) },
-        'output file NOT exists,': function (params) { 
+        'output file NOT exists,': function (params) {
 
-            var isExists = (path.existsSync(params.output) && params.exists);
+            var isExists = (fs.existsSync(params.output) && params.exists);
 
             assert.isFalse (isExists);
-        
+
         },
         'compress is NOT set,': function (params) { assert.isFalse (params.compress); },
         'base64 encode is NOT set.': function (params) { assert.isFalse (params.base64); },
-        
-        
+
+
     }
 
 });
@@ -136,10 +136,10 @@ normalizeSuite.addBatch({
 
         },
 
-        'input file exists,': function (params) { assert.isTrue (path.existsSync(params.input)); },
+        'input file exists,': function (params) { assert.isTrue (fs.existsSync(params.input)); },
         'compress is set to "yui",': function (params) { assert.equal (params.compress, 'yui'); },
         'base64 encode is set to "1300".': function (params) { assert.equal (params.base64, 1300); },
-        
+
     }
 
 });
@@ -172,7 +172,7 @@ normalizeSuite.addBatch({
         },
 
         'error.': function (params) { assert.instanceOf (params, Error); },
-        
+
     }
 
 });

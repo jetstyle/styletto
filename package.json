@@ -1,7 +1,7 @@
 {
     "name": "styletto",
     "description": "CSS assets manager",
-    "version": "0.2.9",
+    "version": "0.3",
     "keywords": ["asset management", "css"],
     "homepage": "http://github.com/jetstyle/styletto",
     "author": "Aleksey Ivanov <iadramelk@gmail.com>",
@@ -9,9 +9,11 @@
     "main": "./index.js",
     "bin": { "styletto": "./bin/styletto" },
     "dependencies": {
+        "optimist": "*",
+        "colors": "*",
         "csso": "*",
-        "stylus": "*",
         "css-compressor": "*",
+        "stylus": "*",
         "nib": "*"
     },
     "devDependencies": {
@@ -20,5 +22,5 @@
     "scripts": {
          "test": "vows test/* --spec"
     },
-    "engines": { "node": ">=0.6 <0.8" }
+    "engines": { "node": ">=0.6 =<0.8" }
 }
