@@ -1,3 +1,5 @@
+"use strict";
+
 var vows   = require('vows');
 var assert = require('assert');
 var fs     = require('fs');
@@ -11,12 +13,12 @@ var testOne = {
     "output": "examples/_all.css",
     "compress": false,
     "base64": false
-}
+};
 
 var testTwo = {
     "compress": 'yui',
     "base64": 200
-}
+};
 
 var dataFile = fs.readFileSync('examples/b-resources/b-resources.css', 'utf-8');
 
@@ -31,8 +33,8 @@ stylettoSuite.addBatch({
 
         },
 
-        'file writed.': function (data) { assert.isNaN (data) },
-        
+        'file writed.': function (data) { assert.isNaN (data); },
+
     }
 
 });
@@ -47,8 +49,8 @@ stylettoSuite.addBatch({
 
         },
 
-        'output returned.': function (data) { assert.includes (data, '@font-face') },
-        
+        'output returned.': function (data) { assert.includes (data, '@font-face'); },
+
     }
 
 });
@@ -63,8 +65,8 @@ stylettoSuite.addBatch({
 
         },
 
-        'file compressed.': function (data) { assert.includes (data, 'font-style:normal;font-weight:400;') },
-        
+        'file compressed.': function (data) { assert.includes (data, 'font-style:normal;font-weight:400;'); },
+
     }
 
 });
@@ -79,8 +81,8 @@ stylettoSuite.addBatch({
 
         },
 
-        'file compressed.': function (data) { assert.includes (data, 'font-style:normal;font-weight:normal;') },
-        
+        'file compressed.': function (data) { assert.includes (data, 'font-style:normal;font-weight:normal;'); },
+
     }
 
 });
@@ -95,11 +97,11 @@ stylettoSuite.addBatch({
 
         },
 
-        'gif replaced,': function (data) { assert.includes (data, 'url("data:image/gif;base64,') },
-        'png replaced,': function (data) { assert.includes (data, 'url("data:image/png;base64,') },
-        'jpeg replaced,': function (data) { assert.includes (data, 'url("data:image/jpeg;base64,') },
-        'svg replaced.': function (data) { assert.includes (data, 'url("data:image/svg+xml;base64,') },
-        
+        'gif replaced,': function (data) { assert.includes (data, 'url("data:image/gif;base64,'); },
+        'png replaced,': function (data) { assert.includes (data, 'url("data:image/png;base64,'); },
+        'jpeg replaced,': function (data) { assert.includes (data, 'url("data:image/jpeg;base64,'); },
+        'svg replaced.': function (data) { assert.includes (data, 'url("data:image/svg+xml;base64,'); },
+
     }
 
 });
@@ -114,9 +116,9 @@ stylettoSuite.addBatch({
 
         },
 
-        'jpeg NOT replaced.': function (data) { assert.includes (data, 'url(\'b-resources.jpeg\');') },
+        'jpeg NOT replaced.': function (data) { assert.includes (data, 'url(\'b-resources.jpeg\');'); },
 
-        
+
     }
 
 });

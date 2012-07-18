@@ -1,3 +1,5 @@
+"use strict";
+
 var vows   = require('vows');
 var assert = require('assert');
 var fs     = require('fs');
@@ -117,7 +119,6 @@ parserSuite.addBatch({
         'png path fixed,': function (data) { assert.include (data, 'url("b-resources/b-resources.png")'); },
         'jpeg path fixed,': function (data) { assert.include (data, 'url("b-resources/b-resources.jpeg")'); },
         'jpg path fixed,': function (data) { assert.include (data, 'url("b-resources/b-resources.jpg")'); },
-        'png path fixed,': function (data) { assert.include (data, 'url("b-resources/b-resources.png")'); },
         'gif path fixed,': function (data) { assert.include (data, 'url("b-resources/b-resources.gif")'); },
         'svg path fixed,': function (data) { assert.include (data, 'url("b-resources/b-resources.svg")'); },
         'web paths NOT fixed,': function (data) {

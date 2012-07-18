@@ -1,23 +1,24 @@
 #!/usr/bin/env node
 
+"use strict";
 
 // config
 
-packageJson = JSON.parse(require('fs').readFileSync(__dirname + '/../package.json', 'utf8'));
+var packageJson = JSON.parse( require( 'fs' ).readFileSync( __dirname + '/../package.json', 'utf8' ) );
 
-APPLICATION_NAME    = packageJson.name;
-APPLICATION_VERSION = packageJson.version;
+var APPLICATION_NAME    = packageJson.name;
+var APPLICATION_VERSION = packageJson.version;
 
 
 // dependencies
 
-var path     = require('path');
-var fs       = require('fs');
-var colors   = require("colors");
-var optimist = require('optimist');
+var path     = require( 'path' );
+var fs       = require( 'fs' );
+var colors   = require( 'colors' );
+var optimist = require( 'optimist' );
 
-var settings = require('../lib/settings');
-var styletto = require('../lib/styletto').init;
+var settings = require( '../lib/settings' );
+var styletto = require( '../lib/styletto' ).init;
 
 
 // message functions
@@ -47,7 +48,7 @@ var showHelp = function() {
 
     process.exit();
 
-}
+};
 
 var showVersion = function() {
 
@@ -55,12 +56,12 @@ var showVersion = function() {
 
     process.exit();
 
-}
+};
 
 
 // argiments parsing
 
-var arguments = optimist.options( {
+var args = optimist.options( {
 
     help: {
         alias: 'h',
@@ -88,7 +89,7 @@ var arguments = optimist.options( {
 
 // show version
 
-if ( arguments['version'] ) {
+if ( args.version ) {
 
     showVersion();
 
@@ -97,7 +98,7 @@ if ( arguments['version'] ) {
 
 // show help
 
-var noFileOrShowHelp = ( arguments['_'].length === 0 || arguments['help'] );
+var noFileOrShowHelp = ( args._.length === 0 || args.help );
 
 if ( noFileOrShowHelp ) {
 
@@ -116,7 +117,7 @@ if ( config instanceof Error ) {
 
     process.exit();
 
-};
+}
 
 
 // initialising main module with params
@@ -135,10 +136,10 @@ styletto( config[0], config[1], function( err, result ) {
 
     } else {
 
-        console.log("\nIt's saved!");
+        console.log( '\nIt's saved!');
 
         process.exit();
 
     }
 
-});
+} );

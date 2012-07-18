@@ -1,3 +1,5 @@
+"use strict";
+
 var vows   = require('vows');
 var assert = require('assert');
 var fs     = require('fs');
@@ -14,33 +16,32 @@ var testOne = {
     "output": "_all.css",
     "compress": true,
     "base64": true
-}
+};
 
 var testTwo = {
     "input": "all.css"
-}
+};
 
 var testThree = {
     "input": "all.css",
     "output": "non-existing.css",
     "compress": false,
     "base64": false
-}
+};
 
 var testFour = {
     "input": "all.css",
     "compress": 'yui',
     "base64": 1300
-}
+};
 
 var testFive = {
     "output": "_all.css",
-}
+};
 
 var testSix = {
     "input": ["b-comment/b--comment.css", "b-foot/b--foot.css"],
-}
-
+};
 
 
 normalizeSuite.addBatch({
@@ -61,13 +62,17 @@ normalizeSuite.addBatch({
 
                 var notExists = (fs.existsSync(params.input[i]) !== true);
 
-                if (notExists) err = true;
+                if (notExists) {
+
+                    err = true;
+
+                }
 
             }
 
             assert.isFalse (err);
         },
-        'output file provided,': function (params) { assert.isString (params.output) },
+        'output file provided,': function (params) { assert.isString (params.output); },
         'output file exists,': function (params) {
 
             var isExists = (fs.existsSync(params.output) && params.exists);
@@ -110,7 +115,7 @@ normalizeSuite.addBatch({
         },
 
         'input file exists,': function (params) { assert.isTrue (fs.existsSync(params.input)); },
-        'output file provided,': function (params) { assert.isString (params.output) },
+        'output file provided,': function (params) { assert.isString (params.output); },
         'output file NOT exists,': function (params) {
 
             var isExists = (fs.existsSync(params.output) && params.exists);
@@ -176,7 +181,6 @@ normalizeSuite.addBatch({
     }
 
 });
-
 
 
 exports.normalizeSuite = normalizeSuite;
