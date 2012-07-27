@@ -59,7 +59,7 @@ var showVersion = function() {
 };
 
 
-// argiments parsing
+// arguments parsing
 
 var args = optimist.options( {
 
@@ -109,7 +109,7 @@ if ( noFileOrShowHelp ) {
 
 // running flags parser
 
-var config = settings();
+var config = settings( args );
 
 if ( config instanceof Error ) {
 
@@ -136,7 +136,7 @@ styletto( config[0], config[1], function( err, result ) {
 
     } else {
 
-        console.log( '\nIt's saved!');
+        console.log( '\nIt\'s saved!');
 
         process.exit();
 
