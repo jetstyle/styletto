@@ -28,7 +28,19 @@ var argumentsList = {
     base64: {
         alias: 'b',
         short: 'b'
-    }
+    },
+
+    path: {
+        default: false
+    },
+
+    errors: {},
+
+    'errors-includes': { },
+
+    'errors-resources': { },
+
+    'errors-processors': { }
 
 };
 
@@ -45,13 +57,13 @@ settingsSuite.addBatch({
 
         },
 
-        'input location is "examples/all.css",': function (params) { assert.equal (params[0].input, 'examples/all.css'); },
+        'input location is "examples/all.css",': function (params) { assert.equal (params.input, 'examples/all.css'); },
 
-        'output location is "examples/__all.css",': function (params) { assert.equal (params[0].output, 'examples/__all.css'); },
+        'output location is "examples/__all.css",': function (params) { assert.equal (params.output, 'examples/__all.css'); },
 
-        'compress content is set,': function (params) { assert.isTrue (params[0].compress); },
+        'compress content is set,': function (params) { assert.isTrue (params.compress); },
 
-        'base64 encode is set.': function (params) { assert.isTrue (params[0].base64); },
+        'base64 encode is set.': function (params) { assert.isTrue (params.base64); },
 
     }
 
@@ -67,13 +79,13 @@ settingsSuite.addBatch({
 
         },
 
-        'input location IS "examples/all.css",': function (params) { assert.equal (params[0].input, 'examples/all.css'); },
+        'input location IS "examples/all.css",': function (params) { assert.equal (params.input, 'examples/all.css'); },
 
-        'output location IS NOT set,': function (params) { assert.isUndefined (params[0].output); },
+        'output location IS NOT set,': function (params) { assert.isUndefined (params.output); },
 
-        'compress content IS NOT set,': function (params) { assert.isUndefined (params[0].compress); },
+        'compress content IS NOT set,': function (params) { assert.isUndefined (params.compress); },
 
-        'base64 encode IS NOT set.': function (params) { assert.isUndefined (params[0].base64); },
+        'base64 encode IS NOT set.': function (params) { assert.isUndefined (params.base64); },
 
     }
 
@@ -89,13 +101,13 @@ settingsSuite.addBatch({
 
         },
 
-        'input location IS ARRAY,': function (params) { assert.isArray (params[0].input); },
+        'input location IS ARRAY,': function (params) { assert.isArray (params.input); },
 
-        'output location IS "_all.css",': function (params) { assert.equal (params[0].output, '_all.css'); },
+        'output location IS "_all.css",': function (params) { assert.equal (params.output, '_all.css'); },
 
-        'compress content IS NOT set,': function (params) { assert.isFalse (params[0].compress); },
+        'compress content IS NOT set,': function (params) { assert.isFalse (params.compress); },
 
-        'base64 encode IS set.': function (params) { assert.isTrue (params[0].base64); },
+        'base64 encode IS set.': function (params) { assert.isTrue (params.base64); },
 
     }
 
@@ -111,13 +123,13 @@ settingsSuite.addBatch({
 
         },
 
-        'input location IS ARRAY,': function (params) { assert.isArray (params[0].input); },
+        'input location IS ARRAY,': function (params) { assert.isArray (params.input); },
 
-        'output location IS "_all.css",': function (params) { assert.equal (params[0].output, '_all.css'); },
+        'output location IS "_all.css",': function (params) { assert.equal (params.output, '_all.css'); },
 
-        'compress content IS set to "yui",': function (params) { assert.equal (params[0].compress, 'yui'); },
+        'compress content IS set to "yui",': function (params) { assert.equal (params.compress, 'yui'); },
 
-        'base64 encode IS set to "100000".': function (params) { assert.equal (params[0].base64, '100000'); },
+        'base64 encode IS set to "100000".': function (params) { assert.equal (params.base64, '100000'); },
 
     }
 
@@ -133,7 +145,7 @@ settingsSuite.addBatch({
 
         },
 
-        'base64 encode IS NOT set.': function (params) { assert.isFalse (params[0].base64); },
+        'base64 encode IS NOT set.': function (params) { assert.isFalse (params.base64); },
 
 
     }

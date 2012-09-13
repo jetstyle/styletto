@@ -25,24 +25,27 @@ var styletto = require( '../lib/styletto' ).init;
 
 var showHelp = function() {
 
-    var helpMsg  = '\nUsage: ' + APPLICATION_NAME + ' ';
-        helpMsg += '[options]'.blue + ' inputFile [outputFile]';
-        helpMsg += '\n\nOptions:\n\n';
-        helpMsg += '  -h, --help'.blue + '                ';
-        helpMsg += 'displays help information\n';
-        helpMsg += '  -v, --version'.blue + '             ';
-        helpMsg += 'displays package version\n';
-        helpMsg += '  -c, --compress[=engine]'.blue + '   ';
-        helpMsg += 'compress output file using either ' + 'csso'.blue;
-        helpMsg += '\n                            ';
-        helpMsg += 'or ' + 'yui'.blue + ' compressor, default is ';
-        helpMsg += 'csso'.blue + '\n';
-        helpMsg += '  -b, --base64[=size]'.blue + '       ';
-        helpMsg += 'encode images to base64, images that are more';
-        helpMsg += '\n                            ';
-        helpMsg += 'than "size" value in bytes will not be enoded,';
-        helpMsg += '\n                            ';
-        helpMsg += 'default size is ' + '10000'.blue + ' bytes\n';
+    var helpMsg  = '\nUsage: ' + APPLICATION_NAME + ' [options]'.blue + ' inputFile [outputFile]\n\n';
+        helpMsg += 'Options:\n\n';
+        helpMsg += '  -h, --help'.blue + '                Displays help information\n';
+        helpMsg += '  -v, --version'.blue + '             Displays package version\n';
+        helpMsg += '  -c, --compress[=engine]'.blue + '   Compress output file using either ' + 'csso'.blue + '\n';
+        helpMsg +=           '                            or ' + 'yui'.blue + ' compressor, default ' + 'is csso'.blue + '\n';
+        helpMsg += '  -b, --base64[=size]'.blue + '       Encode images to base64, images that are more\n';
+        helpMsg +=           '                            than "size" value in bytes will not be encoded,\n';
+        helpMsg +=           '                            default size is ' + '10000'.blue + ' bytes\n';
+
+        helpMsg += '  --path[=dir]'.blue + '              Path to directory from which path to includes and\n';
+        helpMsg +=           '                            resources in inputFile will be resolved, default is\n';
+        helpMsg +=           '                            inputFile directory.\n\n';
+
+        helpMsg += 'Error handling rules: ' + 'error'.blue + ' will exit process without saving, ' + 'alert'.blue + ' will print\n';
+        helpMsg += 'error text to console but will also try to finish compiling, ' + 'ignore'.blue + ' will try\n';
+        helpMsg += 'to finish compiling without printing an error message.\n\n';
+
+        helpMsg += '  --includes[=rule]'.blue + '         Default is ' + 'alert'.blue + '\n';
+        helpMsg += '  --resources[=rule]'.blue + '        Default is ' + 'ignore'.blue + '\n';
+        helpMsg += '  --processors[=rule]'.blue + '       Default is ' + 'error'.blue + '\n';
 
     console.log( helpMsg );
 
@@ -57,7 +60,6 @@ var showVersion = function() {
     process.exit();
 
 };
-
 
 // arguments parsing
 
@@ -81,11 +83,21 @@ var args = optimist.options( {
     base64: {
         alias: 'b',
         short: 'b'
-    }
+    },
+
+    path: {
+        default: false
+    },
+
+    errors: {},
+
+    'errors-includes': { },
+
+    'errors-resources': { },
+
+    'errors-processors': { }
 
 } ).argv;
-
-
 
 // show version
 
@@ -122,24 +134,45 @@ if ( config instanceof Error ) {
 
 // initialising main module with params
 
-styletto( config[0], config[1], function( err, result ) {
+styletto( config, function( err, success, css ) {
 
     if ( err ) {
 
-        console.error( '\n' + err );
+        if ( !success ) {
 
-        process.exit();
+            console.error( '\nFile was NOT saved because of following errors:\n\n' + err );
 
-    } else if ( result ) {
+        } else if ( !css ) {
 
-        process.stdout.write( result );
+            console.error( '\n' + err + '\nFile was saved to "' +config.output + '" with some warnings.\n' );
 
-    } else {
+        }
 
-        console.log( '\nIt\'s saved!');
+        else {
 
-        process.exit();
+            console.error( err );
+            process.stdout.write( css );
+
+        }
 
     }
+
+    else if ( success ) {
+
+        if ( !css ) {
+
+           console.log( '\nFile was succesfully saved to ' + config.output + '\n' );
+
+        }
+
+        else {
+
+            process.stdout.write( css );
+
+        }
+
+    }
+
+    process.exit();
 
 } );

@@ -9,38 +9,44 @@ var normalize = require('../lib/normalize');
 
 var normalizeSuite = vows.describe('Normalize module tests');
 
-var pathToConfig= path.resolve('examples');
+var pathToConfig = path.resolve('examples');
 
 var testOne = {
     "input": ["b-includes/_two/b-includes_two.css", "b-includes/_three/b-includes_three.css"],
     "output": "_all.css",
     "compress": true,
-    "base64": true
+    "base64": true,
+    "path": pathToConfig
 };
 
 var testTwo = {
-    "input": "all.css"
+    "input": "all.css",
+    "path": pathToConfig
 };
 
 var testThree = {
     "input": "all.css",
     "output": "non-existing.css",
     "compress": false,
-    "base64": false
+    "base64": false,
+    "path": pathToConfig
 };
 
 var testFour = {
     "input": "all.css",
     "compress": 'yui',
-    "base64": 1300
+    "base64": 1300,
+    "path": pathToConfig
 };
 
 var testFive = {
     "output": "_all.css",
+    "path": pathToConfig
 };
 
 var testSix = {
     "input": ["b-comment/b--comment.css", "b-foot/b--foot.css"],
+    "path": pathToConfig
 };
 
 
@@ -50,7 +56,7 @@ normalizeSuite.addBatch({
 
         topic: function () {
 
-            return normalize(testOne, pathToConfig);
+            return normalize( testOne );
 
         },
 
@@ -93,11 +99,11 @@ normalizeSuite.addBatch({
 
         topic: function () {
 
-            return normalize(testTwo, pathToConfig);
+            return normalize( testTwo );
 
         },
 
-        'input file exists.': function (params) { assert.isTrue (fs.existsSync(params.input)); },
+        'input file exists.': function ( params ) { assert.isTrue (fs.existsSync(params.input)); },
 
     }
 
@@ -110,7 +116,7 @@ normalizeSuite.addBatch({
 
         topic: function () {
 
-            return normalize(testThree, pathToConfig);
+            return normalize( testThree );
 
         },
 
@@ -120,7 +126,7 @@ normalizeSuite.addBatch({
 
             var isExists = (fs.existsSync(params.output) && params.exists);
 
-            assert.isFalse (isExists);
+            assert.isFalse ( isExists );
 
         },
         'compress is NOT set,': function (params) { assert.isFalse (params.compress); },
@@ -137,7 +143,7 @@ normalizeSuite.addBatch({
 
         topic: function () {
 
-            return normalize(testFour, pathToConfig);
+            return normalize( testFour );
 
         },
 
@@ -156,7 +162,7 @@ normalizeSuite.addBatch({
 
         topic: function () {
 
-            return normalize(testFive, pathToConfig);
+            return normalize( testFive );
 
         },
 
@@ -172,7 +178,7 @@ normalizeSuite.addBatch({
 
         topic: function () {
 
-            return normalize(testSix, pathToConfig);
+            return normalize( testSix );
 
         },
 
