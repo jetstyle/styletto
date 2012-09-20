@@ -19,10 +19,11 @@ Installation
 Terminal usage
 ==============
 
-Usage: `styletto [options] inputFile [outputFile]`
+Usage: `styletto [options] -- inputFile [outputFile]`
 
     Options:
 
+      --                        If you use arguments before filenames add this string before filenames
       -h, --help                Displays help information
       -v, --version             Displays package version
       -c, --compress            Compress output file using either "csso"
@@ -102,6 +103,11 @@ If config is loaded from console with some flags setted, then flags value will o
 
 History
 =======
+
+* 0.3.1. What's new:
+
+  - Add temporary fix to help for greedy argument parser in console arguments.
+  - Fixed error then false values of compress and base64 flags didn't revrite values in config.
 
 * 0.3.0. What's new:
 
