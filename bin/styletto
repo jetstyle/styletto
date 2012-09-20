@@ -2,23 +2,18 @@
 
 "use strict";
 
-// config
+var packageJson = JSON.parse( require( 'fs' ).readFileSync( __dirname + '/../package.json', 'utf8' ) ),
 
-var packageJson = JSON.parse( require( 'fs' ).readFileSync( __dirname + '/../package.json', 'utf8' ) );
+    APPLICATION_NAME    = packageJson.name,
+    APPLICATION_VERSION = packageJson.version,
 
-var APPLICATION_NAME    = packageJson.name;
-var APPLICATION_VERSION = packageJson.version;
+    fs       = require( 'fs' ),
+    path     = require( 'path' ),
+    colors   = require( 'colors' ),
+    optimist = require( 'optimist' ),
 
-
-// dependencies
-
-var path     = require( 'path' );
-var fs       = require( 'fs' );
-var colors   = require( 'colors' );
-var optimist = require( 'optimist' );
-
-var settings = require( '../lib/settings' );
-var styletto = require( '../lib/styletto' ).init;
+    settings = require( '../lib/settings' ),
+    styletto = require( '../lib/styletto' ).init;
 
 
 // message functions
@@ -105,6 +100,7 @@ var args = optimist.options( {
 
 } ).argv;
 
+
 // show version
 
 if ( args.version ) {
@@ -131,7 +127,9 @@ var config = settings( args );
 
 if ( config instanceof Error ) {
 
-    console.error( '\n' + config );
+    var ERROR_REGEX = /Error:(\s)*/;
+
+    console.error( '\n' + config.toString().replace( ERROR_REGEX, '' ) + '\n' );
 
     process.exit();
 

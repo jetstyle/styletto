@@ -1,21 +1,14 @@
 "use strict";
 
-var vows   = require( 'vows' );
-var assert = require( 'assert' );
-var fs     = require( 'fs' );
-var path   = require( 'path' );
+var vows   = require( 'vows' ),
+    assert = require( 'assert' ),
+    fs     = require( 'fs' ),
+    path   = require( 'path' ),
 
-var normalize = require( '../lib/normalize' );
+    normalize = require( '../lib/normalize' ),
 
-var normalizeSuite = vows.describe( 'Normalize module tests' );
-
-var pathToConfig = path.resolve( 'examples' );
-
-var testFive = {
-};
-
-var testSix = {
-};
+    pathToConfig = path.resolve( 'examples' ),
+    normalizeSuite = vows.describe( 'Normalize module tests' );
 
 
 normalizeSuite.addBatch( {
@@ -29,6 +22,7 @@ normalizeSuite.addBatch( {
                 'output': '_all.css',
                 'compress': true,
                 'base64': true,
+                'errors': 'ignore',
                 'path': pathToConfig
             };
 
@@ -37,7 +31,6 @@ normalizeSuite.addBatch( {
         },
 
         'all input files exists,': function ( params ) {
-
 
             var err = false;
 
@@ -65,11 +58,7 @@ normalizeSuite.addBatch( {
 
         'output file exists,': function ( params ) {
 
-            var file = path.join( params.path, params.output );
-
-            var isExists = ( fs.existsSync( file ) && params.exists );
-
-            assert.isTrue ( isExists );
+            assert.isTrue ( params.exists );
 
         },
 
@@ -79,9 +68,25 @@ normalizeSuite.addBatch( {
 
         },
 
-        'base64 encode size is set to 10000.': function ( params ) {
+        'base64 encode size is set to 10000,': function ( params ) {
 
             assert.equal ( params.base64, 10000 );
+
+        },
+
+        'all error types are set to "ignore",': function ( params ) {
+
+            var imports    = ( params.errors.imports === 'ignore' ),
+                resources  = ( params.errors.resources === 'ignore' ),
+                processors = ( params.errors.processors === 'ignore' );
+
+            assert.isTrue ( resources && imports && processors );
+
+        },
+
+        'resolvePath is equal to output path.': function ( params ) {
+
+            assert.equal ( path.dirname( params.output ), params.resolvePath );
 
         },
 
@@ -137,15 +142,13 @@ normalizeSuite.addBatch({
 
         'input file exists,': function ( params ) {
 
-            var file = path.join( params.path, params.input );
-
-            assert.isTrue ( fs.existsSync( file ) );
+            assert.isTrue( fs.existsSync( params.input[0] ) );
 
         },
 
         'output file provided,': function ( params ) {
 
-            assert.isString ( params.output );
+            assert.isString( params.output );
 
         },
 
@@ -153,7 +156,7 @@ normalizeSuite.addBatch({
 
             var isExists = ( fs.existsSync( params.output ) && params.exists );
 
-            assert.isFalse ( isExists );
+            assert.isFalse( isExists );
 
         },
 
@@ -267,26 +270,32 @@ normalizeSuite.addBatch({
         topic: function () {
 
             var config = {
-                'input': 'all.css',
+                'input': 'examples/all.css',
                 'errors': {
                     'imports': 'error',
                     'resources': 'alert',
                     'processors': 'ignore'
                 },
-                'path': pathToConfig
+                'path': process.cwd()
             };
 
             return normalize( config );
 
         },
 
-        'errors.imports value is "error".': function ( params ) {
+        'resolvePath is current dir,': function ( params ) {
+
+            assert.equal ( params.resolvePath, process.cwd() );
+
+        },
+
+        'errors.imports value is "error",': function ( params ) {
 
             assert.equal ( params.errors.imports, 'error' );
 
         },
 
-        'errors.resources value is "alert".': function ( params ) {
+        'errors.resources value is "alert",': function ( params ) {
 
             assert.equal ( params.errors.resources, 'alert' );
 
