@@ -13,7 +13,7 @@ var packageJson = JSON.parse( require( 'fs' ).readFileSync( __dirname + '/../pac
     optimist = require( 'optimist' ),
 
     settings = require( '../lib/settings' ),
-    styletto = require( '../lib/styletto' ).init;
+    styletto = require( '../lib/styletto' );
 
 
 // message functions
