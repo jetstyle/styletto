@@ -95,15 +95,16 @@ Minimal config:
 
     {
         "input": "dir/file.css",
-        "path": "path/to/root/dir",
+        "path": "path/to/root/dir"
     }
 
 If config is loaded from console with some flags setted, then flags value will overwrite config's one.
 
-History
-=======
 
-* 0.3.0. What's new:
+Changelog
+=========
+
+* **0.3.0. What's new:**
 
   - Detailed control for error reporting.
   - You can now send path to base dir from console as well as from config.
