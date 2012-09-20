@@ -47,7 +47,7 @@ var showHelp = function() {
         '  --errors-resources' + '[=rule]'.yellow + '        Default is ' + 'ignore'.yellow,
         '  --errors-processors' + '[=rule]'.yellow + '       Default is ' + 'error'.yellow,
         ''
-    ].join('\n');;
+    ].join('\n');
 
     console.log( helpMsg );
 
