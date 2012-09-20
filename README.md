@@ -3,7 +3,7 @@ About  [![Build Status](https://secure.travis-ci.org/jetstyle/styletto.png)](htt
 
 **styletto** is a simple css assets manager written on node.js. Requires node.js and npm to work and install.
 
-It can take one of more .css or .styl files as input and join them to one. It differs from on other assent menages in following ways:
+It can take one of more files as input and join them together. It differs from on other assent menages in following ways:
 
 1. It automatically and recursively includes imported css (from @import rules) to output file with exception of absolute paths.
 2. It resolves relative resources paths (images, fonts) to the given output file destination.
@@ -14,45 +14,45 @@ It can take one of more .css or .styl files as input and join them to one. It di
 Installation
 ============
 
-```npm install styletto -g```
+`npm install styletto -g`
 
 Terminal usage
 ==============
 
-Usage: ```styletto [options] inputFile [outputFile]```
+Usage: `styletto [options] inputFile [outputFile]`
 
-Options:
+    Options:
 
-  -h, --help                Displays help information
-  -v, --version             Displays package version
-  -c, --compress            Compress output file using either "csso"
-                            or "yui" compressor, default is "csso"
-  -b, --base64[=size]       Encode images to base64, images that are more
-                            than "size" value in bytes will not be encoded,
-                            default size is "10000" bytes
-  --path[=dir]              Path to directory from which path to inputFile and
-                            outputFile will be resolved, default is
-                            current directory.
+      -h, --help                Displays help information
+      -v, --version             Displays package version
+      -c, --compress            Compress output file using either "csso"
+                                or "yui" compressor, default is "csso"
+      -b, --base64[=size]       Encode images to base64, images that are more
+                                than "size" value in bytes will not be encoded,
+                                default size is "10000" bytes
+      --path[=dir]              Path to directory from which path to inputFile and
+                                outputFile will be resolved, default is
+                                current directory.
 
-Error handling rules: "error" will exit process without saving, "alert" will print
-error text to stderr but will also try to finish compiling, "ignore" will try
-to finish compiling without printing an error message.
+    Error handling rules: "error" will exit process without saving, "alert" will print
+    error text to stderr but will also try to finish compiling, "ignore" will try
+    to finish compiling without printing an error message.
 
-  --errors[=rule]                  Shortcut for all rules at once
+      --errors[=rule]                  Shortcut for all rules at once
 
-  --errors-imports[=rule]          Default is "alert"
-  --errors-resources[=rule]        Default is "ignore"
-  --errors-processors[=rule]       Default is "error"
+      --errors-imports[=rule]          Default is "alert"
+      --errors-resources[=rule]        Default is "ignore"
+      --errors-processors[=rule]       Default is "error"
 
 
 Usage from another app
 ======================
 
-Usage: ```styletto( config, function( err, success, css ) {} )```
+Usage: `styletto( config, function( err, success, css ) {} )`
 
-* ```err``` will return string with errors if there any.
-* ```success``` will return true or false. True if process finished and css is returned or saved to file, false if process was finished fithout saving.
-* ```css``` if ther is no output file in config, then output css will be returned there.
+* `err` will return string with errors if there any.
+* `success` will return true or false. True if process finished and css is returned or saved to file, false if process was finished fithout saving.
+* `css` if ther is no output file in config, then output css will be returned there.
 
 Example:
 
@@ -99,3 +99,15 @@ Minimal config:
     }
 
 If config is loaded from console with some flags setted, then flags value will overwrite config's one.
+
+History
+=======
+
+* 0.3.0. What's new:
+
+  - Detailed control for error reporting.
+  - You can now send path to base dir from console as well as from config.
+  - Less support.
+  - Changed internal API.
+  - Full rewrite inside.
+  - Ton of bugfixes.
