@@ -8,13 +8,12 @@ var vows   = require( 'vows' ),
     Uglifier       = require( '../lib/uglifier' ),
     ErrorCollector = require( '../lib/ErrorCollector' ),
 
-    pathToConfig  = path.resolve( 'examples' ),
-    uglifierSuite = vows.describe( 'Uglifier module tests' ),
-    errors = { resources: 'ignore' },
-    resolvePath = path.resolve( 'examples/b-resources' );
+    resolvePath    = path.resolve( 'examples/b-resources' ),
+
+    uglifierSuite  = vows.describe( 'Uglifier module tests' );
 
 
-uglifierSuite.addBatch({
+uglifierSuite.addBatch( {
 
     'Testing compress: "csso" mode function:': {
 
@@ -47,9 +46,10 @@ uglifierSuite.addBatch({
 
     }
 
-});
+} );
 
-uglifierSuite.addBatch({
+
+uglifierSuite.addBatch( {
 
     'Testing compress "yui" mode function:': {
 
@@ -83,7 +83,7 @@ uglifierSuite.addBatch({
 
 });
 
-uglifierSuite.addBatch({
+uglifierSuite.addBatch( {
 
     'Testing base64 compression function:': {
 
@@ -133,9 +133,9 @@ uglifierSuite.addBatch({
 
     }
 
-});
+} );
 
-uglifierSuite.addBatch({
+uglifierSuite.addBatch( {
 
     'Testing base64Replace function size limit:': {
 
@@ -168,9 +168,9 @@ uglifierSuite.addBatch({
 
     }
 
-});
+} );
 
-uglifierSuite.addBatch({
+uglifierSuite.addBatch( {
 
     'errors.resources setted to "error" and wrong image url returned:': {
 
@@ -203,6 +203,6 @@ uglifierSuite.addBatch({
 
     }
 
-});
+} );
 
 exports.uglifierSuite = uglifierSuite;
