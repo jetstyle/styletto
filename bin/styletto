@@ -20,33 +20,34 @@ var packageJson = JSON.parse( require( 'fs' ).readFileSync( __dirname + '/../pac
 
 var showHelp = function() {
 
-    var helpMsg  = '\n';
-
-    helpMsg += 'Usage: ' + APPLICATION_NAME + ' [options] inputFile [outputFile]\n\n';
-
-    helpMsg += 'Options:\n\n';
-
-    helpMsg += '  -h, --help                Displays help information\n';
-    helpMsg += '  -v, --version             Displays package version\n';
-    helpMsg += '  -c, --compress' + '[=engine]'.yellow + '   Compress output file using either ' + 'csso'.yellow + '\n';
-    helpMsg += '                            or ' + 'yui'.yellow + ' compressor, default is ' + 'csso'.yellow + '\n';
-    helpMsg += '  -b, --base64' + '[=size]'.yellow + '       Encode images to base64, images that are more\n';
-    helpMsg += '                            than "size" value in bytes will not be encoded,\n';
-    helpMsg += '                            default size is ' + '10000'.yellow + ' bytes\n';
-
-    helpMsg += '  --path[=dir]              Path to directory from which path to includes and\n';
-    helpMsg += '                            resources in inputFile will be resolved, default is\n';
-    helpMsg += '                            inputFile directory.\n\n';
-
-    helpMsg += 'Error handling rules: ' + 'error'.yellow + ' will exit process without saving, ' + 'alert'.yellow + ' will print\n';
-    helpMsg += 'error text to console but will also try to finish compiling, ' + 'ignore'.yellow + ' will try\n';
-    helpMsg += 'to finish compiling without printing an error message.\n\n';
-
-    helpMsg += '  --errors' + '[=rule]'.yellow + '                  Shortcut for all rules at once\n\n';
-
-    helpMsg += '  --errors-imports' + '[=rule]'.yellow + '          Default is ' + 'alert'.yellow + '\n';
-    helpMsg += '  --errors-resources' + '[=rule]'.yellow + '        Default is ' + 'ignore'.yellow + '\n';
-    helpMsg += '  --errors-processors' + '[=rule]'.yellow + '       Default is ' + 'error'.yellow + '\n';
+    var helpMsg = [
+        '',
+        'Usage: ' + APPLICATION_NAME + ' [options] inputFile [outputFile]',
+        '',
+        'Options:',
+        '',
+        '  -h, --help                Displays help information',
+        '  -v, --version             Displays package version',
+        '  -c, --compress' + '[=engine]'.yellow + '   Compress output file using either ' + 'csso'.yellow,
+        '                            or ' + 'yui'.yellow + ' compressor, default is ' + 'csso'.yellow,
+        '  -b, --base64' + '[=size]'.yellow + '       Encode images to base64, images that are more',
+        '                            than "size" value in bytes will not be encoded,',
+        '                            default size is ' + '10000'.yellow + ' bytes',
+        '  --path[=dir]              Path to directory from which path to includes and',
+        '                            resources in inputFile will be resolved, default is',
+        '                            inputFile directory.',
+        '',
+        'Error handling rules: ' + 'error'.yellow + ' will exit process without saving, ' + 'alert'.yellow + ' will print',
+        'error text to console but will also try to finish compiling, ' + 'ignore'.yellow + ' will try',
+        'to finish compiling without printing an error message.',
+        '',
+        '  --errors' + '[=rule]'.yellow + '                  Shortcut for all rules at once',
+        '',
+        '  --errors-imports' + '[=rule]'.yellow + '          Default is ' + 'alert'.yellow,
+        '  --errors-resources' + '[=rule]'.yellow + '        Default is ' + 'ignore'.yellow,
+        '  --errors-processors' + '[=rule]'.yellow + '       Default is ' + 'error'.yellow,
+        ''
+    ].join('\n');;
 
     console.log( helpMsg );
 
