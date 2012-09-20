@@ -105,13 +105,11 @@ If config is loaded from console with some flags setted, then flags value will o
 Changelog
 =========
 
-* *0.3.1. What's new:*
-
+### 0.3.1. What's new:
   - Add temporary fix to help for greedy argument parser in console arguments.
-  - Fixed error then false values of compress and base64 flags didn't revrite values in config.
+  - Fixed error then false values of compress and base64 flags didn't revrite values in config.    
 
-* *0.3.0. What's new:*
-
+### 0.3.0. What's new:
   - Detailed control for error reporting.
   - You can now send path to base dir from console as well as from config.
   - Less support.
