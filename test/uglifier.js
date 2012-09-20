@@ -6,7 +6,7 @@ var vows   = require( 'vows' ),
     path   = require( 'path' ),
 
     Uglifier       = require( '../lib/uglifier' ),
-    ErrorCollector = require( '../lib/ErrorCollector' ),
+    ErrorCollector = require( '../lib/errorcollector' ),
 
     resolvePath    = path.resolve( 'examples/b-resources' ),
 
