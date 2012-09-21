@@ -19,7 +19,7 @@ Installation
 Terminal usage
 ==============
 
-Usage: `styletto [options] -- inputFile [outputFile]`
+Usage: `styletto [options] inputFile [outputFile]`
 
     Options:
 
