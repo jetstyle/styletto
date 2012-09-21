@@ -22,7 +22,7 @@ var showHelp = function() {
 
     var helpMsg = [
         '',
-        'Usage: ' + APPLICATION_NAME + ' [options] -- inputFile [outputFile]',
+        'Usage: ' + APPLICATION_NAME + ' [options] inputFile [outputFile]',
         '',
         'Options:',
         '',
