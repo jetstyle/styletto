@@ -26,7 +26,6 @@ var showHelp = function() {
         '',
         'Options:',
         '',
-        '  --                        If you use arguments before filenames add this string before filenames',
         '  -h, --help                Displays help information',
         '  -v, --version             Displays package version',
         '  -c, --compress' + '[=engine]'.yellow + '   Compress output file using either ' + 'csso'.yellow,
@@ -78,13 +77,17 @@ var args = optimist.options( {
         boolean: true
     },
 
-    compress: {
-        alias: 'c'
+    c: {
+        boolean: true
     },
 
-    base64: {
-        alias: 'b'
+    b: {
+        boolean: true
     },
+
+    compress: {},
+
+    base64: {},
 
     path: {
         default: false

@@ -23,7 +23,6 @@ Usage: `styletto [options] -- inputFile [outputFile]`
 
     Options:
 
-      --                        If you use arguments before filenames add this string before filenames
       -h, --help                Displays help information
       -v, --version             Displays package version
       -c, --compress            Compress output file using either "csso"
@@ -104,6 +103,9 @@ If config is loaded from console with some flags setted, then flags value will o
 
 Changelog
 =========
+
+### 0.3.2. What's new:
+  - Fixed behavior with -b and -c in the begining of the string.    
 
 ### 0.3.1. What's new:
   - Add temporary fix to help for greedy argument parser in console arguments.

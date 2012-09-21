@@ -20,15 +20,17 @@ var argumentsList = {
         boolean: true
     },
 
-    compress: {
-        alias: 'c',
-        short: 'c'
+    c: {
+        boolean: true
     },
 
-    base64: {
-        alias: 'b',
-        short: 'b'
+    b: {
+        boolean: true
     },
+
+    compress: {},
+
+    base64: {},
 
     path: {
         default: false
@@ -129,19 +131,19 @@ settingsSuite.addBatch({
 
 });
 
-settingsSuite.addBatch({
+settingsSuite.addBatch( {
 
-    'Calling "styletto examples/config.json" returns:': {
+    'Calling "styletto examples/config/config.json" returns:': {
 
         topic: function () {
 
-            return settings( optimist( [ 'examples/config.json' ] ).options( argumentsList ).argv );
+            return settings( optimist( [ 'examples/config/config.json' ] ).options( argumentsList ).argv );
 
         },
 
-        'input location IS ARRAY,': function ( params ) {
+        'input location IS string,': function ( params ) {
 
-            assert.isArray ( params.input );
+            assert.equal( params.input, 'b-resources/b-resources.css' );
 
         },
 
@@ -151,9 +153,9 @@ settingsSuite.addBatch({
 
         },
 
-        'compress content IS NOT set,': function ( params ) {
+        'compress content IS set,': function ( params ) {
 
-            assert.isFalse ( params.compress );
+            assert.isTrue ( params.compress );
 
         },
 
@@ -163,11 +165,53 @@ settingsSuite.addBatch({
 
         },
 
-        'path value is equal to config folder.': function ( params ) {
+        'path value is equal to config folder,': function ( params ) {
 
             assert.equal ( params.path, 'examples' );
 
         },
+
+        'all errors are set to "ignore".': function ( params ) {
+
+            var a = params.errors.processors === 'ignore';
+            var b = params.errors.resources  === 'ignore';
+            var c = params.errors.imports    === 'ignore';
+
+            assert.isTrue ( a && b && c );
+
+        },
+    }
+
+});
+
+settingsSuite.addBatch( {
+
+    'Calling "styletto examples/config/config.json --no-base64 --no-compress --path==examples/config" returns:': {
+
+        topic: function () {
+
+            return settings( optimist( [ 'config.json', '--no-base64', '--no-compress', '--path=examples/config' ] ).options( argumentsList ).argv );
+
+        },
+
+
+        'compress content IS NOT set,': function ( params ) {
+
+            assert.isFalse( params.compress );
+
+        },
+
+        'base64 encode IS NOT set,': function ( params ) {
+
+            assert.isFalse( params.base64 );
+
+        },
+        'path value is equal to config folder.': function ( params ) {
+
+
+            assert.equal( params.path, 'examples/config' );
+
+        }
 
     }
 

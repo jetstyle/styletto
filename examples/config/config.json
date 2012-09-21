@@ -1,0 +1,12 @@
+{
+    "input": "b-resources/b-resources.css",
+    "output": "_all.css",
+    "compress": true,
+    "base64": true,
+    "path": "..",
+    "errors": {
+        "processors": "ignore",
+        "resources": "ignore",
+        "imports": "ignore"
+    }
+}
