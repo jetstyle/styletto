@@ -104,6 +104,9 @@ If config is loaded from console with some flags setted, then flags value will o
 Changelog
 =========
 
+### 0.3.3. What's new:
+  - Fixed bug then .styl files with variables and mixins (i.e. mixin library) was rendered as raw stylus files instead of blank strings.
+
 ### 0.3.2. What's new:
   - Fixed behavior with -b and -c in the begining of the string.    
 
