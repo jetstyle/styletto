@@ -22,6 +22,7 @@ normalizeSuite.addBatch( {
                 'output': '_all.css',
                 'compress': true,
                 'base64': true,
+                'nib': 'vendor',
                 'errors': 'ignore',
                 'path': pathToConfig
             };
@@ -71,6 +72,12 @@ normalizeSuite.addBatch( {
         'base64 encode size is set to 10000,': function ( params ) {
 
             assert.equal ( params.base64, 10000 );
+
+        },
+
+        'nib mixins is set to "vendor",': function ( params ) {
+
+            assert.equal ( params.nib, 'vendor' );
 
         },
 
@@ -124,7 +131,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with input, non-existing output, and false compress/base64 flags returns:': {
+    'Sending config with input, non-existing output, and false compress/base64/nib flags returns:': {
 
         topic: function () {
 
@@ -133,6 +140,7 @@ normalizeSuite.addBatch({
                 'output': 'non-existing.css',
                 'compress': false,
                 'base64': false,
+                'nib': false,
                 'path': pathToConfig
             };
 
@@ -166,6 +174,12 @@ normalizeSuite.addBatch({
 
         },
 
+        'nib is NOT set,': function ( params ) {
+
+            assert.isFalse ( params.nib );
+
+        },
+
         'base64 encode is NOT set.': function ( params ) {
 
             assert.isFalse ( params.base64 );
@@ -179,7 +193,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with normal input, compress: "yui" and base64: "1300" returns:': {
+    'Sending config with normal input, compress: "yui", nib: "true" and base64: "1300" returns:': {
 
         topic: function () {
 
@@ -187,6 +201,7 @@ normalizeSuite.addBatch({
                 'input': 'all.css',
                 'compress': 'yui',
                 'base64': 1300,
+                'nib': true,
                 'path': pathToConfig
             };
 
@@ -208,6 +223,12 @@ normalizeSuite.addBatch({
 
         },
 
+        'nib is set to "true",': function ( params ) {
+
+            assert.isTrue ( params.nib );
+
+
+        },
         'base64 encode is set to "1300".': function ( params ) {
 
             assert.equal ( params.base64, 1300 );

@@ -30,6 +30,10 @@ Usage: `styletto [options] inputFile [outputFile]`
       -b, --base64[=size]       Encode images to base64, images that are more
                                 than "size" value in bytes will not be encoded,
                                 default size is "10000" bytes
+      -n, --nib                 Use nib mixins if you are using stylus,
+                                default is false, can be "true", "false" or "vendor"
+                                "vendor" will only load vendor prefixes mixin from nib
+                                and ignore everything else
       --path[=dir]              Path to directory from which path to inputFile and
                                 outputFile will be resolved, default is
                                 current directory.
@@ -51,8 +55,8 @@ Usage from another app
 Usage: `styletto( config, function( err, success, css ) {} )`
 
 * `err` will return string with errors if there any.
-* `success` will return true or false. True if process finished and css is returned or saved to file, false if process was finished fithout saving.
-* `css` if ther is no output file in config, then output css will be returned there.
+* `success` will return true or false. True if process finished and css is returned or saved to file, false if process was finished without saving.
+* `css` if there is no output file in config, then output css will be returned there.
 
 Example:
 
@@ -83,6 +87,7 @@ Full config example:
         "output": "output.css",
         "compress": false,
         "base64": true,
+        "nib": "vendor",
         "path": "path/to/root/dir",
         "errors": {
             "resources": "alert",
@@ -104,18 +109,21 @@ If config is loaded from console with some flags setted, then flags value will o
 Changelog
 =========
 
+### 0.3.5 What's new:
+  - Nib is now disabled by default. You can enable it again by using **--nib** flag. **--nib=vendor** will enable only vendor prefixes mixin and ignore all other mixins.
+
 ### 0.3.4 What's new:
-  - Fast bugfix for nib bug with config.styl files. Temporally disabled all nib mixins except vendor and clearfix.    
+  - Fast bugfix for nib bug with config.styl files. Temporally disabled all nib mixins except vendor and clearfix.
 
 ### 0.3.3. What's new:
-  - Fixed bug then .styl files with variables and mixins (i.e. mixin library) was rendered as raw stylus files instead of blank strings.    
+  - Fixed bug then .styl files with variables and mixins (i.e. mixin library) was rendered as raw stylus files instead of blank strings.
 
 ### 0.3.2. What's new:
-  - Fixed behavior with -b and -c in the begining of the string.    
+  - Fixed behavior with -b and -c in the beginning of the string.
 
 ### 0.3.1. What's new:
   - Add temporary fix to help for greedy argument parser in console arguments.
-  - Fixed error then false values of compress and base64 flags didn't revrite values in config.    
+  - Fixed error then false values of compress and base64 flags didn't rewrite values in config.
 
 ### 0.3.0. What's new:
   - Detailed control for error reporting.

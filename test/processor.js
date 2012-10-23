@@ -13,29 +13,93 @@ var vows   = require( 'vows' ),
 
 processorSuite.addBatch({
 
-    'In processed .styl file:': {
+    'In processed .styl file with full nib support:': {
 
         topic: function () {
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.styl', dataFile );
+                processed = new Processor( data, '.styl', dataFile, true );
 
             return processed;
 
         },
 
-        'nib function is converted.': function ( data ) {
+        'border-radius function is converted,': function ( data ) {
 
             assert.includes ( data.result, '-webkit-border-radius' );
 
         },
 
+        'clearfix function is converted,': function ( data ) {
+
+            assert.includes ( data.result, 'display: table' );
+
+        },
 
     }
 
 });
 
+processorSuite.addBatch({
+
+    'In processed .styl file with nib support setted to "vendor":': {
+
+        topic: function () {
+
+            var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
+                data      = fs.readFileSync( dataFile, 'utf-8' ),
+                processed = new Processor( data, '.styl', dataFile, 'vendor' );
+
+            return processed;
+
+        },
+
+        'border-radius function is converted,': function ( data ) {
+
+            assert.includes ( data.result, '-webkit-border-radius' );
+
+        },
+
+        'clearfix function is removed,': function ( data ) {
+
+            assert.isNull ( data.result.match(/display..table/) );
+
+        },
+
+    }
+
+});
+
+processorSuite.addBatch({
+
+    'In processed .styl file with nib support disabled:': {
+
+        topic: function () {
+
+            var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
+                data      = fs.readFileSync( dataFile, 'utf-8' ),
+                processed = new Processor( data, '.styl', dataFile, false );
+
+            return processed;
+
+        },
+
+        'border-radius function is removed,': function ( data ) {
+
+            assert.isNull ( data.result.match(/-webkit-border-radius/) );
+
+        },
+
+        'clearfix function is removed,': function ( data ) {
+
+            assert.isNull ( data.result.match(/display..table/) );
+
+        },
+
+    }
+
+});
 processorSuite.addBatch({
 
     'In processed .styl file with error:': {

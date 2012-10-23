@@ -92,8 +92,6 @@
   margin: 0;
 }
 .b-stylus__border {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
   background: linear-gradient(top, #fff, #000);
 }
 

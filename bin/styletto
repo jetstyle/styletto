@@ -33,8 +33,12 @@ var showHelp = function() {
         '  -b, --base64' + '[=size]'.yellow + '       Encode images to base64, images that are more',
         '                            than "size" value in bytes will not be encoded,',
         '                            default size is ' + '10000'.yellow + ' bytes',
-        '  --path[=dir]              Path to directory from which path to inputFile and',
-        '                            outputFile will be resolved, default is',
+        '  -n, --nib                 Use nib mixins if you are using stylus, ',
+        '                            default is ' + 'false'.yellow + ', can be ' + 'true'.yellow + ', ' + 'false'.yellow + ' or ' + 'vendor'.yellow,
+        '                            vendor will only load vendor prefixes mixin from nib',
+        '                            and ignore everything else',
+        '  --path[=dir]              Path to directory from which path to inputFile',
+        '                            and outputFile will be resolved, default is',
         '                            current directory.',
         '',
         'Error handling rules: ' + 'error'.yellow + ' will exit process without saving, ' + 'alert'.yellow + ' will print',
@@ -68,21 +72,35 @@ var showVersion = function() {
 var args = optimist.options( {
 
     help: {
+
         alias: 'h',
         boolean: true
+
     },
 
     version: {
+
         alias: 'v',
         boolean: true
+
     },
 
     c: {
+
         boolean: true
+
     },
 
     b: {
+
         boolean: true
+
+    },
+
+    n: {
+
+        boolean: true
+
     },
 
     compress: {},
@@ -90,16 +108,24 @@ var args = optimist.options( {
     base64: {},
 
     path: {
+
         default: false
+
+    },
+
+    nib: {
+
+        default: false
+
     },
 
     errors: {},
 
-    'errors-imports': { },
+    'errors-imports': {},
 
-    'errors-resources': { },
+    'errors-resources': {},
 
-    'errors-processors': { }
+    'errors-processors': {}
 
 } ).argv;
 
