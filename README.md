@@ -104,6 +104,9 @@ If config is loaded from console with some flags setted, then flags value will o
 Changelog
 =========
 
+### 0.3.4 What's new:
+  - Fast bugfix for nib bug with config.styl files. Temporally disabled all nib mixins except vendor and clearfix.
+
 ### 0.3.3. What's new:
   - Fixed bug then .styl files with variables and mixins (i.e. mixin library) was rendered as raw stylus files instead of blank strings.
 
