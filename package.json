@@ -14,7 +14,7 @@
         "csso": "*",
         "css-compressor": "*",
         "stylus": "*",
-        "nib": "0.8.*",
+        "nib": "0.8",
         "less": "*"
     },
     "devDependencies": {
