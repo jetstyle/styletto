@@ -31,7 +31,7 @@ Usage: `styletto [options] inputFile [outputFile]`
                                 than "size" value in bytes will not be encoded,
                                 default size is "10000" bytes
       -n, --nib                 Use nib mixins if you are using stylus,
-                                default is false, can be "true", "false" or "vendor"
+                                default is "vendor", can be "true", "false" or "vendor"
                                 "vendor" will only load vendor prefixes mixin from nib
                                 and ignore everything else
       --path[=dir]              Path to directory from which path to inputFile and
@@ -110,7 +110,7 @@ Changelog
 =========
 
 ### 0.3.5 What's new:
-  - Nib is now disabled by default. You can enable it again by using **--nib** flag. **--nib=vendor** will enable only vendor prefixes mixin and ignore all other mixins.
+  - Nib can now be disabled of partially enabled from settings. Possible values are: true, false, vendor (will only load vendor mixin from nib and ignore all else). It is set to 'vendor' by default for backwards compatibility. It will be set to false starting from version 0.5.0.
 
 ### 0.3.4 What's new:
   - Fast bugfix for nib bug with config.styl files. Temporally disabled all nib mixins except vendor and clearfix.
