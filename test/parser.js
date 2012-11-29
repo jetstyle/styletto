@@ -80,9 +80,22 @@ parserSuite.addBatch( {
                 },
                 collection = new ErrorCollector( params.errors ),
                 parser     = new Parser( params, collection ),
-                data;
+                result,
+                info = {
+                    baseDir: params.resolvePath,
+                    importFile: undefined,
+                    relativePath: 'all.css',
+                    mediaQuery: '',
+                    that: parser
+                };
 
-            return parser.importsReplace( path.resolve( 'examples/all.css' ), params.resolvePath );
+            parser.importsReplace( info, function( err, results ) {
+
+                result = results;
+
+            } );
+
+            return result.compiled;
 
         },
 
@@ -133,9 +146,16 @@ parserSuite.addBatch( {
                 },
                 collection = new ErrorCollector( params.errors ),
                 parser     = new Parser( params, collection ),
-                data;
+                data,
+                info = {
+                    baseDir: params.resolvePath,
+                    importFile: undefined,
+                    relativePath: 'alsdfssdfl.css',
+                    mediaQuery: '',
+                    that: parser
+                };
 
-                parser.importsReplace( path.resolve( '../examples/all.css' ), params.resolvePath );
+                parser.importsReplace( info, function( err, results ) {} );
 
             return parser;
         },
@@ -170,7 +190,7 @@ parserSuite.addBatch( {
                 parser     = new Parser( params, collection ),
                 data;
 
-            return parser.importsSearch( importsTextSuite, 'examples/' );
+            return parser.importsSearch( importsTextSuite, 'examples/', undefined, parser );
 
         },
 

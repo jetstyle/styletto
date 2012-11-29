@@ -113,11 +113,7 @@ var args = optimist.options( {
 
     },
 
-    nib: {
-
-        default: false
-
-    },
+    nib: {},
 
     errors: {},
 
@@ -206,6 +202,5 @@ styletto( config, function( err, success, css ) {
 
     }
 
-    process.exit();
 
 } );

@@ -1,32 +1,32 @@
-/* all.css */
+/* /Users/iadramelk/Sites/styletto/examples/all.css */
 
-/* b-includes.css */
+/* b-includes/b-includes.css */
 
 .b-includes {}
 
-/* b-includes_one.css */
+/* _one/b-includes_one.css */
 
 .b-includes_one {}
 
 
 
-/* b-includes_two.css */
+/* _two/b-includes_two.css */
 
 .b-includes_two {}
 
 
 
-/* b-includes_three.css */
+/* _three/b-includes_three.css */
 
 .b-includes_tree {}
 
 
 
-/* b-includes_four.css */
+/* _four/b-includes_four.css */
 
 .b-includes_four {}
 
-/* b-resources.css */
+/* ../../b-resources/b-resources.css */
 
 .b-resources {}
 
@@ -86,7 +86,7 @@
 
 
 
-/* b-stylus.styl */
+/* b-stylus/b-stylus.styl */
 
 .b-stylus {
   margin: 0;
@@ -100,7 +100,7 @@
 
 
 
-/* b-less.less */
+/* b-less/b-less.less */
 
 .box {
   color: #fe33ac;
