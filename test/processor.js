@@ -19,21 +19,21 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.styl', dataFile, true );
+                processor = new Processor( data, '.styl', dataFile, true );
 
-            return processed;
-
-        },
-
-        'border-radius function is converted,': function ( data ) {
-
-            assert.includes ( data.result, '-webkit-border-radius' );
+            return processor.parse();
 
         },
 
-        'clearfix function is converted,': function ( data ) {
+        'border-radius function is converted,': function ( err, data ) {
 
-            assert.includes ( data.result, 'display: table' );
+            assert.includes ( data, '-webkit-border-radius' );
+
+        },
+
+        'clearfix function is converted,': function ( err, data ) {
+
+            assert.includes ( data, 'display: table' );
 
         },
 
@@ -57,13 +57,13 @@ processorSuite.addBatch({
 
         'border-radius function is converted,': function ( data ) {
 
-            assert.includes ( data.result, '-webkit-border-radius' );
+            assert.includes ( data, '-webkit-border-radius' );
 
         },
 
         'clearfix function is removed,': function ( data ) {
 
-            assert.isNull ( data.result.match(/display..table/) );
+            assert.isNull ( data.match(/display..table/) );
 
         },
 

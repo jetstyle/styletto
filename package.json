@@ -9,14 +9,15 @@
     "main": "./index.js",
     "bin": { "styletto": "./bin/styletto" },
     "dependencies": {
-        "optimist": "*",
-        "colors": "*",
-        "csso": "*",
-        "css-compressor": "*",
-        "stylus": "*",
-        "nib": "0.8",
-        "less": "*",
-        "async": "0.1.x"
+        "optimist": "0.3.x",
+        "colors": "0.6.x",
+        "csso": "1.3.x",
+        "css-compressor": "1.0.x",
+        "stylus": "0.x",
+        "nib": "0.8.x",
+        "less": "1.3.x",
+        "async": "0.1.x",
+        "if-ie.styl": "https://github.com/kizu/if-ie.styl/archive/master.tar.gz"
     },
     "devDependencies": {
         "vows": "*"

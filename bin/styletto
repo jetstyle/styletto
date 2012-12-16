@@ -13,7 +13,9 @@ var packageJson = JSON.parse( require( 'fs' ).readFileSync( __dirname + '/../pac
     optimist = require( 'optimist' ),
 
     settings = require( '../lib/settings' ),
-    styletto = require( '../lib/styletto' );
+    styletto = require( '../lib/styletto' ),
+
+    start = Date.now();
 
 
 // message functions
@@ -167,13 +169,15 @@ styletto( config, function( err, success, css ) {
 
     if ( err ) {
 
+        var end = ( Date.now() - start );
+
         if ( !success ) {
 
             console.error( '\nFile was NOT saved because of following errors:\n\n' + err );
 
         } else if ( !css ) {
 
-            console.error( '\n' + err + '\nFile was saved to "' +config.output + '" with some warnings.\n' );
+            console.error( '\n' + err + '\nFile was saved to "' +config.output + '" with some warnings.\n\nDone in ' + end + 'ms.\n' );
 
         }
 
@@ -188,9 +192,11 @@ styletto( config, function( err, success, css ) {
 
     else if ( success ) {
 
+        var end = ( Date.now() - start );
+
         if ( !css ) {
 
-           console.log( '\nFile was succesfully saved to ' + config.output + '\n' );
+            console.log( '\nFile was succesfully saved to ' + config.output + '\n\nDone in ' + end + 'ms.\n' );
 
         }
 
@@ -202,5 +208,8 @@ styletto( config, function( err, success, css ) {
 
     }
 
+
+
+    process.exit();
 
 } );
