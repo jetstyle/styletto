@@ -22,20 +22,15 @@ stylettoSuite.addBatch( {
                 path: 'examples',
                 input: 'all.css',
                 output: '_all.css'
-            },
-            result = NaN;
+            };
 
-            styletto( config, function( err, success, css ) {
-
-                result = ( !err && success && !css ) ? true : false;
-
-            } );
-
-            return result;
+            styletto( config, this.callback );
 
         },
 
-        'file writed.': function ( data ) {
+        'file writed.': function ( err, result ) {
+
+            var data = ( !err && result.success && !result.data ) ? true : false;
 
             assert.isTrue ( data );
 
@@ -57,20 +52,15 @@ stylettoSuite.addBatch( {
                 errors: 'ignore',
                 path: 'examples',
                 input: 'all.css'
-            },
-            result = NaN;
+            };
 
-            styletto( config, function( err, success, css ) {
-
-                result = ( !err && success && css ) ? css : false;
-
-            } );
-
-            return result;
+            styletto( config, this.callback );
 
         },
 
-        'output returned.': function ( data ) {
+        'output returned.': function ( err, result ) {
+
+            var data = ( !err && result.success && result.data ) ? result.data : false;
 
             assert.includes ( data, '@font-face' );
 

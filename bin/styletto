@@ -165,36 +165,36 @@ if ( config instanceof Error ) {
 
 // initialising main module with params
 
-styletto( config, function( err, success, css ) {
+styletto( config, function( err, result ) {
 
     if ( err ) {
 
         var end = ( Date.now() - start );
 
-        if ( !success ) {
+        if ( !result.success ) {
 
             console.error( '\nFile was NOT saved because of following errors:\n\n' + err );
 
-        } else if ( !css ) {
+        } else if ( !result.data ) {
 
-            console.error( '\n' + err + '\nFile was saved to "' +config.output + '" with some warnings.\n\nDone in ' + end + 'ms.\n' );
+            console.error( '\n' + err + '\nFile was saved to "' + config.output + '" with some warnings.\n\nDone in ' + end + 'ms.\n' );
 
         }
 
         else {
 
             console.error( err );
-            process.stdout.write( css );
+            process.stdout.write( result.data );
 
         }
 
     }
 
-    else if ( success ) {
+    else if ( result.success ) {
 
         var end = ( Date.now() - start );
 
-        if ( !css ) {
+        if ( !result.data ) {
 
             console.log( '\nFile was succesfully saved to ' + config.output + '\n\nDone in ' + end + 'ms.\n' );
 
@@ -202,13 +202,11 @@ styletto( config, function( err, success, css ) {
 
         else {
 
-            process.stdout.write( css );
+            process.stdout.write( result.data );
 
         }
 
     }
-
-
 
     process.exit();
 

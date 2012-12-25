@@ -21,7 +21,7 @@ processorSuite.addBatch({
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
                 processor = new Processor( data, '.styl', dataFile, true );
 
-            return processor.parse();
+            processor.parse( this.callback );
 
         },
 
@@ -49,19 +49,19 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.styl', dataFile, 'vendor' );
+                processor = new Processor( data, '.styl', dataFile, 'vendor' );
 
-            return processed;
+            processor.parse( this.callback );
 
         },
 
-        'border-radius function is converted,': function ( data ) {
+        'border-radius function is converted,': function ( err, data ) {
 
             assert.includes ( data, '-webkit-border-radius' );
 
         },
 
-        'clearfix function is removed,': function ( data ) {
+        'clearfix function is removed,': function ( err, data ) {
 
             assert.isNull ( data.match(/display..table/) );
 
@@ -79,21 +79,21 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.styl', dataFile, false );
+                processor = new Processor( data, '.styl', dataFile, false );
 
-            return processed;
-
-        },
-
-        'border-radius function is removed,': function ( data ) {
-
-            assert.isNull ( data.result.match(/-webkit-border-radius/) );
+            processor.parse( this.callback );
 
         },
 
-        'clearfix function is removed,': function ( data ) {
+        'border-radius function is removed,': function ( err, data ) {
 
-            assert.isNull ( data.result.match(/display..table/) );
+            assert.isNull ( data.match(/-webkit-border-radius/) );
+
+        },
+
+        'clearfix function is removed,': function ( err, data ) {
+
+            assert.isNull ( data.match(/display..table/) );
 
         },
 
@@ -108,15 +108,15 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus-err.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.styl', dataFile );
+                processor = new Processor( data, '.styl', dataFile );
 
-            return processed;
+            processor.parse( this.callback );
 
         },
 
-        'we receive error on exit.': function ( data ) {
+        'we receive error on exit.': function ( err, data ) {
 
-            assert.instanceOf( data.error, Error );
+            assert.instanceOf( err, Error );
 
         },
 
@@ -133,15 +133,15 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-less/b-less.less' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.less', dataFile );
+                processor = new Processor( data, '.less', dataFile );
 
-            return processed;
+            processor.parse( this.callback );
 
         },
 
-        'mixin is resolved.': function ( data ) {
+        'mixin is resolved.': function ( err, data ) {
 
-            assert.includes ( data.result, '-moz-box-shadow: 0 0 5px rgba' );
+            assert.includes ( data, '-moz-box-shadow: 0 0 5px rgba' );
 
         },
 
@@ -158,15 +158,15 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-less/b-less-err.less' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.less', dataFile );
+                processor = new Processor( data, '.less', dataFile );
 
-            return processed;
+            processor.parse( this.callback );
 
         },
 
-        'we receive error on exit.': function ( data ) {
+        'we receive error on exit.': function ( err, data ) {
 
-            assert.instanceOf( data.error, Object );
+            assert.instanceOf( err, Error );
 
         },
 
@@ -183,9 +183,9 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/all.css' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processed = new Processor( data, '.css', dataFile );
+                processor = new Processor( data, '.css', dataFile );
 
-            return processed;
+            processor.parse( this.callback );
 
         },
 

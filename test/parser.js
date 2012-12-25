@@ -35,26 +35,19 @@ parserSuite.addBatch( {
                 parser     = new Parser( params, collection ),
                 data;
 
-            parser.parse( function ( resultCollection, resultData ) {
-
-                collection = resultCollection;
-
-                data = resultData;
-
-            } );
-
-            return data;
+            parser.parse( this.callback );
 
         },
 
-        'first input file added,': function ( data ) {
+        'first input file added,': function ( err, result ) {
 
-            assert.include ( data, '.b-includes {}' );
+            assert.include ( result.data, '.b-includes {}' );
+
         },
 
-        'second input file added.': function ( data ) {
+        'second input file added.': function ( err, result ) {
 
-            assert.include ( data, '.b-resources {}' );
+            assert.include ( result.data, '.b-resources {}' );
 
         },
 
@@ -89,37 +82,31 @@ parserSuite.addBatch( {
                     that: parser
                 };
 
-            parser.importsReplace( info, function( err, results ) {
-
-                result = results;
-
-            } );
-
-            return result.compiled;
+            parser.importsReplace( info, this.callback );
 
         },
 
-        'CSS comments are deleted,': function ( data ) {
+        'CSS comments are deleted,': function ( err, data ) {
 
-            assert.isFalse( /\/\*@import "commented-url-must-be-deleted.css";*\//.test( data ) );
-
-        },
-
-        '.styl files are replaced,': function ( data ) {
-
-            assert.include( data, '.b-stylus {' );
+            assert.isFalse( /\/\*@import "commented-url-must-be-deleted.css";*\//.test( data.compiled ) );
 
         },
 
-        'imports are inserted,': function ( data ) {
+        '.styl files are replaced,': function ( err, data ) {
 
-            assert.include( data, '.b-includes_tree {}' );
+            assert.include( data.compiled, '.b-stylus {' );
 
         },
 
-        'resources are resolved.': function ( data ) {
+        'imports are inserted,': function ( err, data ) {
 
-            assert.include( data, 'url("b-resources/b-resources.png")' );
+            assert.include( data.compiled, '.b-includes_tree {}' );
+
+        },
+
+        'resources are resolved.': function ( err, data ) {
+
+            assert.include( data.compiled, 'url("b-resources/b-resources.png")' );
 
         },
 
@@ -155,14 +142,13 @@ parserSuite.addBatch( {
                     that: parser
                 };
 
-                parser.importsReplace( info, function( err, results ) {} );
+                parser.importsReplace( info, this.callback );
 
-            return parser;
         },
 
-        'error.': function ( data ) {
+        'error.': function ( err, data ) {
 
-            assert.isTrue ( data.collection.criticalError );
+            assert.isFalse ( data );
 
         },
 
@@ -190,32 +176,32 @@ parserSuite.addBatch( {
                 parser     = new Parser( params, collection ),
                 data;
 
-            return parser.importsSearch( importsTextSuite, 'examples/', undefined, parser );
+            parser.importsSearch( importsTextSuite, 'examples/', 'examples/includes-search.css', parser, this.callback );
 
         },
 
-        '"http://some.ru/external.css" are ignored,': function ( data ) {                   assert.include ( data, ' "http://some.ru/external.css"' ); },
-        '"https://some.secure.ru/external.css" are ignored,': function ( data ) {           assert.include ( data, ' "https://some.secure.ru/external.css"' ); },
-        '"/absolute.url.must.not.resolve.css" are ignored,': function ( data ) {            assert.include ( data, ' "/absolute.url.must.not.resolve.css"' ); },
-        '\'http://some.ru/external.css\' are ignored,': function ( data ) {                 assert.include ( data, ' \'http://some.ru/external.css\'' ); },
-        '\'https://some.secure.ru/external.css\' are ignored,': function ( data ) {         assert.include ( data, ' \'https://some.secure.ru/external.css\'' ); },
-        '\'/absolute.url.must.not.resolve.css\' are ignored,': function ( data ) {          assert.include ( data, ' \'/absolute.url.must.not.resolve.css\'' ); },
-        'url("http://some.ru/external.css") are ignored,': function ( data ) {              assert.include ( data, 'url("http://some.ru/external.css")' ); },
-        'url("https://some.secure.ru/external.css") are ignored,': function ( data ) {      assert.include ( data, 'url("https://some.secure.ru/external.css")' ); },
-        'url("/absolute.url.must.not.resolve.css") are ignored,': function ( data ) {       assert.include ( data, 'url("/absolute.url.must.not.resolve.css")' ); },
-        'url(\'http://some.ru/external.css\') are ignored,': function ( data ) {            assert.include ( data, 'url(\'http://some.ru/external.css\')' ); },
-        'url(\'https://some.secure.ru/external.css\') are ignored,': function ( data ) {    assert.include ( data, 'url(\'https://some.secure.ru/external.css\')' ); },
-        'url(\'/absolute.url.must.not.resolve.css\') are ignored,': function ( data ) {     assert.include ( data, 'url(\'/absolute.url.must.not.resolve.css\')' ); },
-        'url(http://some.ru/external.css) are ignored,': function ( data ) {                assert.include ( data, 'url(http://some.ru/external.css)' ); },
-        'url(https://some.secure.ru/external.css) are ignored,': function ( data ) {        assert.include ( data, 'url(https://some.secure.ru/external.css)' ); },
-        'url(/absolute.url.must.not.resolve.css) are ignored,': function ( data ) {         assert.include ( data, 'url(/absolute.url.must.not.resolve.css)' ); },
-        '"b-includes/b-includes.css" are replaced,': function ( data ) {                    assert.include ( data, '.b-includes {}' ); },
-        '\'_one/b-includes_one.css\' are replaced,': function ( data ) {                    assert.include ( data, '.b-includes_one {}' ); },
-        'url(\'_two/b-includes_two.css\') are replaced,': function ( data ) {               assert.include ( data, '.b-includes_two {}' ); },
-        'url(_three/b-includes_three.css) are replaced,': function ( data ) {               assert.include ( data, '.b-includes_tree {}' ); },
-        'url("_four/b-includes_four.css") are replaced,': function ( data ) {               assert.include ( data, '.b-includes_four {}' ); },
-        'url(\'../../b-resources/b-resources.css\') are replaced,': function ( data ) {     assert.include ( data, '.b-resources__png { background: url("b-resources/b-resources.png"); }' ); },
-        'mediaquery "screen and (max-device-width: 480px)" are saved.': function ( data ) { assert.include ( data, '@media screen and (max-device-width: 480px)' ); },
+        '"http://some.ru/external.css" are ignored,': function ( err, data ) {                   assert.include ( data, ' "http://some.ru/external.css"' ); },
+        '"https://some.secure.ru/external.css" are ignored,': function ( err, data ) {           assert.include ( data, ' "https://some.secure.ru/external.css"' ); },
+        '"/absolute.url.must.not.resolve.css" are ignored,': function ( err, data ) {            assert.include ( data, ' "/absolute.url.must.not.resolve.css"' ); },
+        '\'http://some.ru/external.css\' are ignored,': function ( err, data ) {                 assert.include ( data, ' \'http://some.ru/external.css\'' ); },
+        '\'https://some.secure.ru/external.css\' are ignored,': function ( err, data ) {         assert.include ( data, ' \'https://some.secure.ru/external.css\'' ); },
+        '\'/absolute.url.must.not.resolve.css\' are ignored,': function ( err, data ) {          assert.include ( data, ' \'/absolute.url.must.not.resolve.css\'' ); },
+        'url("http://some.ru/external.css") are ignored,': function ( err, data ) {              assert.include ( data, 'url("http://some.ru/external.css")' ); },
+        'url("https://some.secure.ru/external.css") are ignored,': function ( err, data ) {      assert.include ( data, 'url("https://some.secure.ru/external.css")' ); },
+        'url("/absolute.url.must.not.resolve.css") are ignored,': function ( err, data ) {       assert.include ( data, 'url("/absolute.url.must.not.resolve.css")' ); },
+        'url(\'http://some.ru/external.css\') are ignored,': function ( err, data ) {            assert.include ( data, 'url(\'http://some.ru/external.css\')' ); },
+        'url(\'https://some.secure.ru/external.css\') are ignored,': function ( err, data ) {    assert.include ( data, 'url(\'https://some.secure.ru/external.css\')' ); },
+        'url(\'/absolute.url.must.not.resolve.css\') are ignored,': function ( err, data ) {     assert.include ( data, 'url(\'/absolute.url.must.not.resolve.css\')' ); },
+        'url(http://some.ru/external.css) are ignored,': function ( err, data ) {                assert.include ( data, 'url(http://some.ru/external.css)' ); },
+        'url(https://some.secure.ru/external.css) are ignored,': function ( err, data ) {        assert.include ( data, 'url(https://some.secure.ru/external.css)' ); },
+        'url(/absolute.url.must.not.resolve.css) are ignored,': function ( err, data ) {         assert.include ( data, 'url(/absolute.url.must.not.resolve.css)' ); },
+        '"b-includes/b-includes.css" are replaced,': function ( err, data ) {                    assert.include ( data, '.b-includes {}' ); },
+        '\'_one/b-includes_one.css\' are replaced,': function ( err, data ) {                    assert.include ( data, '.b-includes_one {}' ); },
+        'url(\'_two/b-includes_two.css\') are replaced,': function ( err, data ) {               assert.include ( data, '.b-includes_two {}' ); },
+        'url(_three/b-includes_three.css) are replaced,': function ( err, data ) {               assert.include ( data, '.b-includes_tree {}' ); },
+        'url("_four/b-includes_four.css") are replaced,': function ( err, data ) {               assert.include ( data, '.b-includes_four {}' ); },
+        'url(\'../../b-resources/b-resources.css\') are replaced,': function ( err, data ) {     assert.include ( data, '.b-resources__png { background: url("b-resources/b-resources.png"); }' ); },
+        'mediaquery "screen and (max-device-width: 480px)" are saved.': function ( err, data ) { assert.include ( data, '@media screen and (max-device-width: 480px)' ); },
 
     }
 
