@@ -22,7 +22,6 @@ normalizeSuite.addBatch( {
                 'output': '_all.css',
                 'compress': true,
                 'base64': true,
-                'nib': 'vendor',
                 'errors': 'ignore',
                 'path': pathToConfig
             };
@@ -71,13 +70,7 @@ normalizeSuite.addBatch( {
 
         'base64 encode size is set to 10000,': function ( params ) {
 
-            assert.equal ( params.base64, 10000 );
-
-        },
-
-        'nib mixins is set to "vendor",': function ( params ) {
-
-            assert.equal ( params.nib, 'vendor' );
+            assert.equal ( params.base64.limit, 10000 );
 
         },
 
@@ -131,7 +124,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with input, non-existing output, and false compress/base64/nib flags returns:': {
+    'Sending config with input, non-existing output, and false compress/base64 flags returns:': {
 
         topic: function () {
 
@@ -140,7 +133,6 @@ normalizeSuite.addBatch({
                 'output': 'non-existing.css',
                 'compress': false,
                 'base64': false,
-                'nib': false,
                 'path': pathToConfig
             };
 
@@ -174,12 +166,6 @@ normalizeSuite.addBatch({
 
         },
 
-        'nib is NOT set,': function ( params ) {
-
-            assert.isFalse ( params.nib );
-
-        },
-
         'base64 encode is NOT set.': function ( params ) {
 
             assert.isFalse ( params.base64 );
@@ -193,7 +179,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with normal input, compress: "yui", nib: "true" and base64: "1300" returns:': {
+    'Sending config with normal input, compress: "yui" and base64: "1300" returns:': {
 
         topic: function () {
 
@@ -201,7 +187,6 @@ normalizeSuite.addBatch({
                 'input': 'all.css',
                 'compress': 'yui',
                 'base64': 1300,
-                'nib': true,
                 'path': pathToConfig
             };
 
@@ -223,15 +208,9 @@ normalizeSuite.addBatch({
 
         },
 
-        'nib is set to "true",': function ( params ) {
-
-            assert.isTrue ( params.nib );
-
-
-        },
         'base64 encode is set to "1300".': function ( params ) {
 
-            assert.equal ( params.base64, 1300 );
+            assert.equal ( params.base64.limit, 1300 );
 
         },
 
@@ -385,5 +364,111 @@ normalizeSuite.addBatch({
 
 });
 
+
+normalizeSuite.addBatch( {
+
+    'Sending config with base64.limit = 1300 and base64.types = { "png" : "image/png" } returns:': {
+
+        topic: function () {
+
+            var config = {
+                'input': [ 'b-includes/_two/b-includes_two.css', 'b-includes/_three/b-includes_three.css' ],
+                'output': '_all.css',
+                'compress': true,
+                'base64': {
+                    'limit': 1300,
+                    'types': {
+                        'png': 'image/png'
+                    }
+                },
+                'errors': 'ignore',
+                'path': pathToConfig
+            };
+
+            return normalize( config );
+
+        },
+
+        'base64.limit = 1300,': function ( params ) {
+
+            assert.isTrue ( params.base64.limit === 1300 );
+
+        },
+
+        'base64.types have only png.': function ( params ) {
+
+            assert.equal ( params.base64.types.png, 'image/png' );
+
+        }
+
+    }
+
+});
+
+normalizeSuite.addBatch( {
+
+    'Sending config with base64.types = "abracadabra" returns:': {
+
+        topic: function () {
+
+            var config = {
+                'input': [ 'b-includes/_two/b-includes_two.css', 'b-includes/_three/b-includes_three.css' ],
+                'output': '_all.css',
+                'compress': true,
+                'base64': {
+                    'limit': 1300,
+                    'types': 'abrecadabra'
+                },
+                'errors': 'ignore',
+                'path': pathToConfig
+            };
+
+            return normalize( config );
+
+        },
+
+        'error.': function ( params ) {
+
+            assert.instanceOf ( params, Error );
+
+        },
+
+    }
+
+});
+
+normalizeSuite.addBatch( {
+
+    'Sending config with base64.limit = "abracadabra" returns:': {
+
+        topic: function () {
+
+            var config = {
+                'input': [ 'b-includes/_two/b-includes_two.css', 'b-includes/_three/b-includes_three.css' ],
+                'output': '_all.css',
+                'compress': true,
+                'base64': {
+                    'limit': 'abrecadabra',
+                    'types': {
+                        'png': 'image/png'
+                    }
+                },
+                'errors': 'ignore',
+                'path': pathToConfig
+            };
+
+            return normalize( config );
+
+        },
+
+        'error.': function ( params ) {
+
+            assert.instanceOf ( params, Error );
+
+        },
+
+    }
+
+});
 
 exports.normalizeSuite = normalizeSuite;

@@ -35,10 +35,6 @@ var showHelp = function() {
         '  -b, --base64' + '[=size]'.yellow + '       Encode images to base64, images that are more',
         '                            than "size" value in bytes will not be encoded,',
         '                            default size is ' + '10000'.yellow + ' bytes',
-        '  -n, --nib                 Use nib mixins if you are using stylus, ',
-        '                            default is ' + 'vendor'.yellow + ', can be ' + 'true'.yellow + ', ' + 'false'.yellow + ' or ' + 'vendor'.yellow,
-        '                            vendor will only load vendor prefixes mixin from nib',
-        '                            and ignore everything else',
         '  --path[=dir]              Path to directory from which path to inputFile',
         '                            and outputFile will be resolved, default is',
         '                            current directory.',
@@ -99,12 +95,6 @@ var args = optimist.options( {
 
     },
 
-    n: {
-
-        boolean: true
-
-    },
-
     compress: {},
 
     base64: {},
@@ -114,8 +104,6 @@ var args = optimist.options( {
         default: false
 
     },
-
-    nib: {},
 
     errors: {},
 

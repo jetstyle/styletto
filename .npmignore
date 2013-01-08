@@ -5,6 +5,5 @@
 examples
 node_modules
 test
-README.md
 *.tgz
 .travis.yml

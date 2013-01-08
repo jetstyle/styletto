@@ -83,12 +83,6 @@ settingsSuite.addBatch( {
 
         },
 
-        'nib is set,': function ( params ) {
-
-            assert.isTrue ( params.nib );
-
-        },
-
         'path value is equal to the current directory.': function ( params ) {
 
             assert.equal ( params.path, process.cwd() );
@@ -124,12 +118,6 @@ settingsSuite.addBatch({
         'compress content IS NOT set,': function ( params ) {
 
             assert.isUndefined ( params.compress );
-
-        },
-
-        'nib IS NOT set,': function ( params ) {
-
-            assert.isUndefined ( params.nib );
 
         },
 
@@ -198,11 +186,11 @@ settingsSuite.addBatch( {
 
 settingsSuite.addBatch( {
 
-    'Calling "styletto examples/config/config.json --no-base64 --no-compress --no-nib --path==examples/config" returns:': {
+    'Calling "styletto examples/config/config.json --no-base64 --no-compress --path==examples/config" returns:': {
 
         topic: function () {
 
-            return settings( optimist( [ 'config.json', '--no-base64', '--no-compress', '--no-nib', '--path=examples/config' ] ).options( argumentsList ).argv );
+            return settings( optimist( [ 'config.json', '--no-base64', '--no-compress', '--path=examples/config' ] ).options( argumentsList ).argv );
 
         },
 
@@ -218,11 +206,6 @@ settingsSuite.addBatch( {
 
         },
 
-        'nib mixins IS NOT set,': function ( params ) {
-
-            assert.isFalse( params.nib );
-
-        },
 
         'path value is equal to config folder.': function ( params ) {
 
@@ -237,11 +220,11 @@ settingsSuite.addBatch( {
 
 settingsSuite.addBatch({
 
-    'Calling "styletto examples/config.json --compress=yui --base64=100000" --nib=vendor returns:': {
+    'Calling "styletto examples/config.json --compress=yui --base64=100000" returns:': {
 
         topic: function () {
 
-            return settings( optimist( [ 'examples/config.json', '--compress=yui', '--base64=100000', '--nib=vendor' ] ).options( argumentsList ).argv );
+            return settings( optimist( [ 'examples/config.json', '--compress=yui', '--base64=100000' ] ).options( argumentsList ).argv );
 
         },
 
@@ -263,12 +246,6 @@ settingsSuite.addBatch({
 
         },
 
-        'nib IS set to "vendor",': function ( params ) {
-
-            assert.equal ( params.nib, 'vendor' );
-
-        },
-
         'base64 encode IS set to "100000".': function ( params ) {
 
             assert.equal ( params.base64, '100000' );
@@ -281,23 +258,17 @@ settingsSuite.addBatch({
 
 settingsSuite.addBatch({
 
-    'Calling "styletto config.json --base64=false --path=examples --nib" returns:': {
+    'Calling "styletto config.json --base64=false --path=examples" returns:': {
 
         topic: function () {
 
-            return settings( optimist( [ 'config.json', '--base64=false', '--path=examples', '--nib' ] ).options( argumentsList ).argv );
+            return settings( optimist( [ 'config.json', '--base64=false', '--path=examples', ] ).options( argumentsList ).argv );
 
         },
 
         'path value is equal to "examples",': function ( params ) {
 
             assert.equal ( params.path, 'examples' );
-
-        },
-
-        'nib set to "true",': function ( params ) {
-
-            assert.equal ( params.nib, true );
 
         },
 
