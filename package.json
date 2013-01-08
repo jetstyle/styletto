@@ -14,10 +14,8 @@
         "csso": "1.3.x",
         "css-compressor": "1.0.x",
         "stylus": "0.x",
-        "nib": "0.8.x",
         "less": "1.3.x",
-        "async": "0.1.x",
-        "if-ie.styl": "https://github.com/kizu/if-ie.styl/archive/master.tar.gz"
+        "async": "0.1.x"
     },
     "devDependencies": {
         "vows": "*"
