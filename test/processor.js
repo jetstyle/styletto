@@ -13,14 +13,14 @@ var vows   = require( 'vows' ),
 
 processorSuite.addBatch({
 
-    'In processed .styl file with i-mixins__clearfix.styl and i-mixins__vendor.styl mixins': {
+    'In processed .styl file with i-mixins__clearfix.styl and i-mixins__vendor.styl imports': {
 
         topic: function () {
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
                 configStylus = {
-                    mixins: [
+                    imports: [
                         path.resolve( 'examples/i-mixins/i-mixins__clearfix.styl' ),
                         path.resolve( 'examples/i-mixins/i-mixins__vendor.styl' )
                     ],
@@ -57,7 +57,7 @@ processorSuite.addBatch({
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
                 configStylus = {
-                    mixins: [
+                    imports: [
                         path.resolve( 'examples/i-mixins/i-mixins__vendor.styl' )
                     ],
                     variables: false
@@ -86,13 +86,13 @@ processorSuite.addBatch({
 
 processorSuite.addBatch({
 
-    'In processed .styl file without mixins:': {
+    'In processed .styl file without imports:': {
 
         topic: function () {
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile, { mixins: false, variables: false } );
+                processor = new Processor( data, '.styl', dataFile, { imports: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -122,7 +122,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile, { mixins: [ path.resolve( 'examples/i-mixins/i-mixins__if-ie.styl' ) ], variables: { 'ie': true } } );
+                processor = new Processor( data, '.styl', dataFile, { imports: [ path.resolve( 'examples/i-mixins/i-mixins__if-ie.styl' ) ], variables: { 'ie': true } } );
 
             processor.parse( this.callback );
 
@@ -146,7 +146,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus-err.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile, { mixins: false, variables: false } );
+                processor = new Processor( data, '.styl', dataFile, { imports: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -171,7 +171,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-less/b-less.less' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.less', dataFile, { mixins: false, variables: false } );
+                processor = new Processor( data, '.less', dataFile, { imports: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -196,7 +196,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-less/b-less-err.less' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.less', dataFile, { mixins: false, variables: false } );
+                processor = new Processor( data, '.less', dataFile, { imports: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -221,7 +221,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/all.css' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.css', dataFile, { mixins: false, variables: false } );
+                processor = new Processor( data, '.css', dataFile, { imports: false, variables: false } );
 
             processor.parse( this.callback );
 

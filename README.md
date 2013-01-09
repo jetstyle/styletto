@@ -45,7 +45,7 @@ Usage: `styletto [options] inputFile [outputFile]`
       --errors-processors[=rule]       Default is "error"
 
     For additional settings, like filetypes for base64 conversion and
-    automatic mixins and variable instertions for stylus use config file.
+    automatic imports and variable instertions for stylus use config file.
 
 
 Usage from another app
@@ -103,7 +103,7 @@ Full config example:
         },
         stylus: {
             variables: { 'ie': true },
-            mixins: [ "relative_path_to_mixin/if-ie.styl" ]
+            imports: [ "relative_path_to_mixin/if-ie.styl" ]
         }
     }
 
@@ -118,14 +118,14 @@ If config is loaded from console with some flags setted, then flags value will o
 
 Config-only flags:
 
-**stylus** — you can set some set of variables and mixins for use in every file here,
+**stylus** — you can set some set of variables and imports for use in every file here,
 they will be added before rendering each file with .styl extension. Variables will be set first.
 
 Example:
 
     stylus: {
         variables: { "ie": true },
-        mixins: [ 'if-ie.style' ]
+        imports: [ 'if-ie.style' ]
     }
 
 **base64**: base64 from config have optional extended syntax — you can optionally add filetypes for conversion (short syntax also works).
@@ -149,10 +149,13 @@ Default types are: gif, png, jpg, jpeg, svg.
 Changelog
 =========
 
+### 0.4.1 What's new:
+    - stylus.mixins renamed to stylus.imports.
+
 ### 0.4.0 What's new:
     - Styletto is now asynchronous,
     - Nib and -n/--nib flags is removed from code.
-    - You can now add stylus mixins and variables from code.
+    - You can now add stylus imports and variables from code.
     - You can now set filetypes and mimetypes for base64 conversion.
     - Fixed bug with less parser, then styletto broke while parsing less files with imports.
 

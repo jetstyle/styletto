@@ -84,9 +84,9 @@ normalizeSuite.addBatch( {
 
         },
 
-        'stylus.mixins = false,': function ( params ) {
+        'stylus.imports = false,': function ( params ) {
 
-            assert.isFalse ( params.stylus.mixins );
+            assert.isFalse ( params.stylus.imports );
 
         },
 
@@ -136,7 +136,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with input, non-existing output, stylus mixin, stylus variable and false compress/base64 flags returns:': {
+    'Sending config with input, non-existing output, stylus import, stylus variable and false compress/base64 flags returns:': {
 
         topic: function () {
 
@@ -146,7 +146,7 @@ normalizeSuite.addBatch({
                 'compress': false,
                 'base64': false,
                 'stylus': {
-                    'mixins': [ 'i-mixins/i-mixins__clearfix.styl' ],
+                    'imports': [ 'i-mixins/i-mixins__clearfix.styl' ],
                     'variables': { 'myname': 'Vasya' }
                 },
                 'path': pathToConfig
@@ -188,9 +188,9 @@ normalizeSuite.addBatch({
 
         },
 
-        'stylus.mixins is set,': function ( params ) {
+        'stylus.imports is set,': function ( params ) {
 
-            assert.equal ( params.stylus.mixins[ 0 ], path.join( process.cwd(), 'examples/i-mixins/i-mixins__clearfix.styl'  ) );
+            assert.equal ( params.stylus.imports[ 0 ], path.join( process.cwd(), 'examples/i-mixins/i-mixins__clearfix.styl'  ) );
 
 
         },
