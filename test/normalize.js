@@ -341,6 +341,40 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
+    'Sending config with src/dest instead of input/output returns:': {
+
+        topic: function () {
+
+            var config = {
+                'src': 'all.css',
+                'dest': '_all.css',
+                'path': pathToConfig
+            };
+
+            return normalize( config );
+
+        },
+
+        'src changed to input,': function ( params ) {
+
+            console.log(params);
+
+            assert.equal ( params.input[ 0 ], path.resolve( process.cwd(), 'examples/all.css' ) );
+
+        },
+
+        'dest changed to output.': function ( params ) {
+
+            assert.equal ( params.output, path.resolve( process.cwd(), 'examples/_all.css' ) );
+
+        },
+
+    }
+
+});
+
+normalizeSuite.addBatch({
+
     'Sending config with two wrong input urls returns:': {
 
         topic: function () {
