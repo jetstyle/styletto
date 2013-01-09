@@ -25,28 +25,27 @@ Usage: `styletto [options] inputFile [outputFile]`
 
       -h, --help                Displays help information
       -v, --version             Displays package version
-      -c, --compress            Compress output file using either "csso"
+      -c, --compress[=engine]   Compress output file using either "csso"
                                 or "yui" compressor, default is "csso"
       -b, --base64[=size]       Encode images to base64, images that are more
                                 than "size" value in bytes will not be encoded,
                                 default size is "10000" bytes
-      -n, --nib                 Use nib mixins if you are using stylus,
-                                default is "vendor", can be "true", "false" or "vendor"
-                                "vendor" will only load vendor prefixes mixin from nib
-                                and ignore everything else
-      --path[=dir]              Path to directory from which path to inputFile and
-                                outputFile will be resolved, default is
+      --path[=dir]              Path to directory from which path to inputFile
+                                and outputFile will be resolved, default is
                                 current directory.
 
     Error handling rules: "error" will exit process without saving, "alert" will print
-    error text to stderr but will also try to finish compiling, "ignore" will try
+    error text to console but will also try to finish compiling, "ignore" will try
     to finish compiling without printing an error message.
 
-      --errors[=rule]                  Shortcut for all rules at once
+      --errors[=rule]                  Shortcut for all rules
 
       --errors-imports[=rule]          Default is "alert"
       --errors-resources[=rule]        Default is "ignore"
       --errors-processors[=rule]       Default is "error"
+
+    For additional settings, like filetypes for base64 conversion and
+    automatic mixins and variable instertions for stylus use config file.
 
 
 Usage from another app
@@ -86,13 +85,25 @@ Full config example:
         "input": ["dir/first.css", "dir/second.styl"],
         "output": "output.css",
         "compress": false,
-        "base64": true,
-        "nib": "vendor",
+        "base64": {
+            "limit": 1500,
+            "types": {
+                'gif':  'image/gif',
+                'png':  'image/png',
+                'jpg':  'image/jpeg',
+                'jpeg': 'image/jpeg',
+                'svg':  'image/svg+xml'
+            }
+        },
         "path": "path/to/root/dir",
         "errors": {
             "resources": "alert",
             "imports": "ignore",
             "processors": "error"
+        },
+        stylus: {
+            variables: { 'ie': true },
+            mixins: [ "relative_path_to_mixin/if-ie.styl" ]
         }
     }
 
@@ -105,9 +116,45 @@ Minimal config:
 
 If config is loaded from console with some flags setted, then flags value will overwrite config's one.
 
+Config-only flags:
+
+**stylus** — you can set some set of variables and mixins for use in every file here,
+they will be added before rendering each file with .styl extension. Variables will be set first.
+
+Example:
+
+    stylus: {
+        variables: { "ie": true },
+        mixins: [ 'if-ie.style' ]
+    }
+
+**base64**: base64 from config have optional extended syntax — you can optionally add filetypes for conversion (short syntax also works).
+
+Example:
+
+    base64: {
+        limit: 1400,
+        types: {
+            'gif':  'image/gif',
+            'png':  'image/png',
+            'jpg':  'image/jpeg',
+            'jpeg': 'image/jpeg',
+            'svg':  'image/svg+xml'
+        }
+    }
+
+Default types are: gif, png, jpg, jpeg, svg.
+
 
 Changelog
 =========
+
+### 0.4.0 What's new:
+    - Styletto is now asynchronous,
+    - Nib and -n/--nib flags is removed from code.
+    - You can now add stylus mixins and variables from code.
+    - You can now set filetypes and mimetypes for base64 conversion.
+    - Fixed bug with less parser, then styletto broke while parsing less files with imports.
 
 ### 0.3.5 What's new:
   - Nib can now be disabled of partially enabled from settings. Possible values are: true, false, vendor (will only load vendor mixin from nib and ignore all else). It is set to 'vendor' by default for backwards compatibility. It will be set to false starting from version 0.5.0.

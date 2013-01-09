@@ -48,6 +48,11 @@ var showHelp = function() {
         '  --errors-imports' + '[=rule]'.yellow + '          Default is ' + 'alert'.yellow,
         '  --errors-resources' + '[=rule]'.yellow + '        Default is ' + 'ignore'.yellow,
         '  --errors-processors' + '[=rule]'.yellow + '       Default is ' + 'error'.yellow,
+        '',
+        'For additional settings, like filetypes for base64 conversion and',
+        'automatic mixins and variable instertions for stylus use config file.',
+        '',
+        'See full documentation at: http://github.com/jetstyle/styletto/',
         ''
     ].join('\n');
 
