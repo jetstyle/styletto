@@ -84,6 +84,18 @@ normalizeSuite.addBatch( {
 
         },
 
+        'stylus.mixins = false,': function ( params ) {
+
+            assert.isFalse ( params.stylus.mixins );
+
+        },
+
+        'stylus.variables = false,': function ( params ) {
+
+            assert.isFalse ( params.stylus.variables );
+
+        },
+
         'resolvePath is equal to output path.': function ( params ) {
 
             assert.equal ( path.dirname( params.output ), params.resolvePath );
@@ -124,7 +136,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with input, non-existing output, and false compress/base64 flags returns:': {
+    'Sending config with input, non-existing output, stylus mixin, stylus variable and false compress/base64 flags returns:': {
 
         topic: function () {
 
@@ -133,6 +145,10 @@ normalizeSuite.addBatch({
                 'output': 'non-existing.css',
                 'compress': false,
                 'base64': false,
+                'stylus': {
+                    'mixins': [ 'i-mixins/i-mixins__clearfix.styl' ],
+                    'variables': { 'myname': 'Vasya' }
+                },
                 'path': pathToConfig
             };
 
@@ -166,9 +182,21 @@ normalizeSuite.addBatch({
 
         },
 
-        'base64 encode is NOT set.': function ( params ) {
+        'base64 encode is NOT set,': function ( params ) {
 
             assert.isFalse ( params.base64 );
+
+        },
+
+        'stylus.mixins is set,': function ( params ) {
+
+            assert.equal ( params.stylus.mixins[ 0 ], path.join( process.cwd(), 'examples/i-mixins/i-mixins__clearfix.styl'  ) );
+
+
+        },
+        'stylus.variable is set.': function ( params ) {
+
+            assert.equal ( params.stylus.variables.myname, 'Vasya' );
 
         },
 
