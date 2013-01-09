@@ -94,6 +94,9 @@
 .b-stylus__border {
   background: linear-gradient(top, #fff, #000);
 }
+div {
+  display: inline-block;
+}
 
 
 

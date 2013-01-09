@@ -2,6 +2,5 @@
     "input": ["b-resources/b-resources.css", "b-includes/b-includes.css"],
     "output": "_all.css",
     "compress": false,
-    "base64": true,
-    "nib": "vendor"
+    "base64": true
 }

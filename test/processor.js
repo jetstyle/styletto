@@ -13,13 +13,20 @@ var vows   = require( 'vows' ),
 
 processorSuite.addBatch({
 
-    'In processed .styl file with full nib support:': {
+    'In processed .styl file with i-mixins__clearfix.styl and i-mixins__vendor.styl mixins': {
 
         topic: function () {
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile, true );
+                configStylus = {
+                    mixins: [
+                        path.resolve( 'examples/i-mixins/i-mixins__clearfix.styl' ),
+                        path.resolve( 'examples/i-mixins/i-mixins__vendor.styl' )
+                    ],
+                    variables: false
+                },
+                processor = new Processor( data, '.styl', dataFile, configStylus );
 
             processor.parse( this.callback );
 
@@ -43,13 +50,19 @@ processorSuite.addBatch({
 
 processorSuite.addBatch({
 
-    'In processed .styl file with nib support setted to "vendor":': {
+    'In processed .styl file with i-mixins__vendor.styl:': {
 
         topic: function () {
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile, 'vendor' );
+                configStylus = {
+                    mixins: [
+                        path.resolve( 'examples/i-mixins/i-mixins__vendor.styl' )
+                    ],
+                    variables: false
+                },
+                processor = new Processor( data, '.styl', dataFile, configStylus );
 
             processor.parse( this.callback );
 
@@ -61,7 +74,7 @@ processorSuite.addBatch({
 
         },
 
-        'clearfix function is removed,': function ( err, data ) {
+        'clearfix function is removed.': function ( err, data ) {
 
             assert.isNull ( data.match(/display..table/) );
 
@@ -73,13 +86,13 @@ processorSuite.addBatch({
 
 processorSuite.addBatch({
 
-    'In processed .styl file with nib support disabled:': {
+    'In processed .styl file without mixins:': {
 
         topic: function () {
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile, false );
+                processor = new Processor( data, '.styl', dataFile, { mixins: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -91,7 +104,7 @@ processorSuite.addBatch({
 
         },
 
-        'clearfix function is removed,': function ( err, data ) {
+        'clearfix function is removed.': function ( err, data ) {
 
             assert.isNull ( data.match(/display..table/) );
 
@@ -100,6 +113,31 @@ processorSuite.addBatch({
     }
 
 });
+
+processorSuite.addBatch({
+
+    'In processed .styl file with i-mixins__if-ie.styl mixin and ie = true variable:': {
+
+        topic: function () {
+
+            var dataFile  = path.resolve( 'examples/b-stylus/b-stylus.styl' ),
+                data      = fs.readFileSync( dataFile, 'utf-8' ),
+                processor = new Processor( data, '.styl', dataFile, { mixins: [ path.resolve( 'examples/i-mixins/i-mixins__if-ie.styl' ) ], variables: { 'ie': true } } );
+
+            processor.parse( this.callback );
+
+        },
+
+        '"display: inline-block;" replaced with "display: inline; zoom: 1;".': function ( err, data ) {
+
+            assert.includes ( data, "zoom: 1;" );
+
+        }
+
+    }
+
+});
+
 processorSuite.addBatch({
 
     'In processed .styl file with error:': {
@@ -108,7 +146,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-stylus/b-stylus-err.styl' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.styl', dataFile );
+                processor = new Processor( data, '.styl', dataFile, { mixins: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -133,7 +171,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-less/b-less.less' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.less', dataFile );
+                processor = new Processor( data, '.less', dataFile, { mixins: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -158,7 +196,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/b-less/b-less-err.less' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.less', dataFile );
+                processor = new Processor( data, '.less', dataFile, { mixins: false, variables: false } );
 
             processor.parse( this.callback );
 
@@ -183,7 +221,7 @@ processorSuite.addBatch({
 
             var dataFile  = path.resolve( 'examples/all.css' ),
                 data      = fs.readFileSync( dataFile, 'utf-8' ),
-                processor = new Processor( data, '.css', dataFile );
+                processor = new Processor( data, '.css', dataFile, { mixins: false, variables: false } );
 
             processor.parse( this.callback );
 

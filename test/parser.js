@@ -29,6 +29,10 @@ parserSuite.addBatch( {
                     resolvePath: path.resolve( 'examples/' ),
                     errors: {
                         imports: 'error'
+                    },
+                    stylus: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
@@ -69,6 +73,10 @@ parserSuite.addBatch( {
                     resolvePath: path.resolve( 'examples/' ),
                     errors: {
                         imports: 'error'
+                    },
+                    stylus: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
@@ -129,6 +137,10 @@ parserSuite.addBatch( {
                     resolvePath: path.resolve( 'examples/' ),
                     errors: {
                         imports: 'error'
+                    },
+                    stylus: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
@@ -170,6 +182,10 @@ parserSuite.addBatch( {
                     resolvePath: path.resolve( 'examples/' ),
                     errors: {
                         imports: 'error'
+                    },
+                    stylus: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
@@ -221,6 +237,10 @@ parserSuite.addBatch( {
                     resolvePath: path.resolve( 'examples/' ),
                     errors: {
                         imports: 'error'
+                    },
+                    stylus: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
