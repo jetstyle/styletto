@@ -82,7 +82,7 @@ Config format
 Full config example:
 
     {
-        "input": ["dir/first.css", "dir/second.styl"],
+    "input": ["dir/first.css", "dir/second.styl", "dir/third.less"],
         "output": "output.css",
         "compress": false,
         "base64": {
@@ -104,6 +104,10 @@ Full config example:
         stylus: {
             variables: { 'ie': true },
             imports: [ "relative_path_to_mixin/if-ie.styl" ]
+        },
+        less: {
+            variables: { 'color': 'red' },
+            imports: [ "relative_path_to_mixin/lesshat.less" ]
         }
     }
 
@@ -121,11 +125,30 @@ Config-only flags:
 **stylus** — you can set some set of variables and imports for use in every file here,
 they will be added before rendering each file with .styl extension. Variables will be set first.
 
+**Warning!** Variables need to be setted it JavaScript types. For example if you need to set 
+array ( example: vendor-prefixes = webkit moz o ms official ), 
+you need to write value as ["webkit", "moz", "o", "ms", "official"] and not as "webkit moz o ms official".
+
 Example:
 
     stylus: {
-        variables: { "ie": true },
-        imports: [ 'if-ie.style' ]
+        variables: {
+            "vendor-prefixes": ["webkit", "moz", "o", "ms", "official" ],
+            "ie" = true
+        },
+        imports: [ "if-ie.styl", "vendor.styl" ]
+    }
+
+**LESS** — you can set some set of variables and imports for use in every file here,
+they will be added before rendering each file with .less extension. Variables will be set first.
+
+LESS variables are always strings (paste them inside quotation marks)
+
+Example:
+
+    less: {
+        variables: { "color": "red" },
+        imports: [ 'lesshat.less' ]
     }
 
 **base64**: base64 from config have optional extended syntax — you can optionally add filetypes for conversion (short syntax also works).
@@ -149,6 +172,9 @@ Default types are: gif, png, jpg, jpeg, svg.
 Changelog
 =========
 
+
+### 0.4.3 What's new:
+    - You can now add LESS variables and imports same way as stylus ones.
 
 ### 0.4.2 What's new:
     - Fixed possible bug with linked object send as config for styletto. Now it's properly unlinking configs before .changing them.
