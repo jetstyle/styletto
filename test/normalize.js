@@ -96,6 +96,18 @@ normalizeSuite.addBatch( {
 
         },
 
+        'less.imports = false,': function ( params ) {
+
+            assert.isFalse ( params.less.imports );
+
+        },
+
+        'less.variables = false,': function ( params ) {
+
+            assert.isFalse ( params.less.variables );
+
+        },
+
         'resolvePath is equal to output path.': function ( params ) {
 
             assert.equal ( path.dirname( params.output ), params.resolvePath );
@@ -136,7 +148,7 @@ normalizeSuite.addBatch({
 
 normalizeSuite.addBatch({
 
-    'Sending config with input, non-existing output, stylus import, stylus variable and false compress/base64 flags returns:': {
+    'Sending config with input, non-existing output, stylus import, stylus variable, less import, less variable and false compress/base64 flags returns:': {
 
         topic: function () {
 
@@ -148,6 +160,10 @@ normalizeSuite.addBatch({
                 'stylus': {
                     'imports': [ 'i-mixins/i-mixins__clearfix.styl' ],
                     'variables': { 'myname': 'Vasya' }
+                },
+                'less': {
+                    'imports': [ 'i-mixins/i-mixins__lesshat.less' ],
+                    'variables': { 'myname': 'Petya' }
                 },
                 'path': pathToConfig
             };
@@ -194,12 +210,25 @@ normalizeSuite.addBatch({
 
 
         },
+
         'stylus.variable is set.': function ( params ) {
 
             assert.equal ( params.stylus.variables.myname, 'Vasya' );
 
         },
 
+        'less.imports is set,': function ( params ) {
+
+            assert.equal ( params.less.imports[ 0 ], path.join( process.cwd(), 'examples/i-mixins/i-mixins__lesshat.less'  ) );
+
+
+        },
+
+        'less.variable is set.': function ( params ) {
+
+            assert.equal ( params.less.variables.myname, 'Petya' );
+
+        },
 
     }
 
@@ -356,8 +385,6 @@ normalizeSuite.addBatch({
         },
 
         'src changed to input,': function ( params ) {
-
-            console.log(params);
 
             assert.equal ( params.input[ 0 ], path.resolve( process.cwd(), 'examples/all.css' ) );
 

@@ -33,6 +33,10 @@ parserSuite.addBatch( {
                     stylus: {
                         mixins: false,
                         variables: false
+                    },
+                    less: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
@@ -75,6 +79,10 @@ parserSuite.addBatch( {
                         imports: 'error'
                     },
                     stylus: {
+                        mixins: false,
+                        variables: false
+                    },
+                    less: {
                         mixins: false,
                         variables: false
                     }
@@ -141,6 +149,10 @@ parserSuite.addBatch( {
                     stylus: {
                         mixins: false,
                         variables: false
+                    },
+                    less: {
+                        mixins: false,
+                        variables: false
                     }
                 },
                 collection = new ErrorCollector( params.errors ),
@@ -184,6 +196,10 @@ parserSuite.addBatch( {
                         imports: 'error'
                     },
                     stylus: {
+                        mixins: false,
+                        variables: false
+                    },
+                    less: {
                         mixins: false,
                         variables: false
                     }
@@ -239,6 +255,10 @@ parserSuite.addBatch( {
                         imports: 'error'
                     },
                     stylus: {
+                        mixins: false,
+                        variables: false
+                    },
+                    less: {
                         mixins: false,
                         variables: false
                     }
