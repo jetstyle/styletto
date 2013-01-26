@@ -180,14 +180,14 @@ Changelog
     - Fixed possible bug with linked object send as config for styletto. Now it's properly unlinking configs before .changing them.
 
 ### 0.4.1 What's new:
-    - stylus.mixins renamed to stylus.imports.
+  - stylus.mixins renamed to stylus.imports.
 
 ### 0.4.0 What's new:
-    - Styletto is now asynchronous,
-    - Nib and -n/--nib flags is removed from code.
-    - You can now add stylus imports and variables from code.
-    - You can now set filetypes and mimetypes for base64 conversion.
-    - Fixed bug with less parser, then styletto broke while parsing less files with imports.
+  - Styletto is now asynchronous,
+  - Nib and -n/--nib flags is removed from code.
+  - You can now add stylus imports and variables from code.
+  - You can now set filetypes and mimetypes for base64 conversion.
+  - Fixed bug with less parser, then styletto broke while parsing less files with imports.
 
 ### 0.3.5 What's new:
   - Nib can now be disabled of partially enabled from settings. Possible values are: true, false, vendor (will only load vendor mixin from nib and ignore all else). It is set to 'vendor' by default for backwards compatibility. It will be set to false starting from version 0.5.0.
