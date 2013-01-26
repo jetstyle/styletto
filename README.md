@@ -174,10 +174,10 @@ Changelog
 
 
 ### 0.4.3 What's new:
-    - You can now add LESS variables and imports same way as stylus ones.
+  - You can now add LESS variables and imports same way as stylus ones.
 
 ### 0.4.2 What's new:
-    - Fixed possible bug with linked object send as config for styletto. Now it's properly unlinking configs before .changing them.
+  - Fixed possible bug with linked object send as config for styletto. Now it's properly unlinking configs before .changing them.
 
 ### 0.4.1 What's new:
   - stylus.mixins renamed to stylus.imports.
