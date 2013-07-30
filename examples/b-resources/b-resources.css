@@ -4,7 +4,7 @@
   font-family: 'PT Sans';
   font-style: normal;
   font-weight: normal;
-  src: local('PT Sans'), local('PTSans'), url('b-resources.woff') format('woff');
+  src: local('PT Sans'), local('PTSans'), url('b-resources.woff?#iefix&v=3.2.1') format('woff');
 }
 
 @font-face {

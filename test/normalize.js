@@ -135,9 +135,7 @@ normalizeSuite.addBatch({
 
         'input file exists.': function ( params ) {
 
-            var file = path.join( params.path, params.input );
-
-            assert.isTrue ( fs.existsSync( file ) );
+            assert.isTrue ( fs.existsSync( params.input[0] ) );
 
         },
 
@@ -253,9 +251,7 @@ normalizeSuite.addBatch({
 
         'input file exists,': function ( params ) {
 
-            var file = path.join( params.path, params.input );
-
-            assert.isTrue ( fs.existsSync( file ) );
+            assert.isTrue ( fs.existsSync( params.input[0] ) );
 
         },
 
