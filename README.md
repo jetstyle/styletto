@@ -172,6 +172,8 @@ Default types are: gif, png, jpg, jpeg, svg.
 Changelog
 =========
 
+### 0.4.5 What's new:
+    - Fixed bug with replacing '../font/fontawesome-webfont.eot?#iefix&v=3.2.1' urls.
 
 ### 0.4.3 What's new:
     - You can now add LESS variables and imports same way as stylus ones.

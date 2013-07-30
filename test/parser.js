@@ -272,6 +272,7 @@ parserSuite.addBatch( {
         },
 
         'woff path fixed,': function ( data ) { assert.include ( data, 'url("b-resources/b-resources.woff")' ); },
+        'woff with params path fixed,': function ( data ) { assert.isTrue( data.indexOf( 'url("b-resources/b-resources.woff?#iefix&v=3.2.1")' ) >= 0 ); },
         'png path fixed,':  function ( data ) { assert.include ( data, 'url("b-resources/b-resources.png")' ); },
         'jpeg path fixed,': function ( data ) { assert.include ( data, 'url("b-resources/b-resources.jpeg")' ); },
         'jpg path fixed,':  function ( data ) { assert.include ( data, 'url("b-resources/b-resources.jpg")' ); },
