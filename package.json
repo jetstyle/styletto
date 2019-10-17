@@ -12,7 +12,7 @@
         "optimist": "0.3.x",
         "colors": "0.6.x",
         "csso": "1.3.x",
-        "clean-css": "0.10.x",
+        "clean-css": "4.2.x",
         "stylus": "0.x",
         "less": "1.3.x",
         "async": "0.1.x"
